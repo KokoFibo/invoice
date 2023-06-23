@@ -45,12 +45,12 @@ class InvoiceEmailController extends Controller
         $footer = '<table style="width: 100%">
         <tr>
             <td style="width: 33%; text-align:left ;  ">
-                <img src="https://sky.blueskycreation.id/web.png" width="30px" style="width: 15px;">
+                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
                 www.kokofibo.com
             </td>
-            <td style="width: 33%; text-align:center"><img src="https://sky.blueskycreation.id/whatsapp.png"
+            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
                     width="30px" style="width: 15px;"> 0877 265 888 36</td>
-            <td style="width: 33%; text-align:right"><img src="https://sky.blueskycreation.id/email.png"
+            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
                     width="30px" style="width: 15px;"> billing@kokofibo.com</td>
         </tr>
     </table>';
