@@ -62,7 +62,7 @@
 
 
             <div class="logo">
-                <img src="{{ asset('images/Blue Sky Creations.png') }}" style="width:250px" alt="">
+                <img src="{{ asset('images/kokofibo logo.png') }}" style="width:250px" alt="">
             </div>
         </div>
 
@@ -102,7 +102,7 @@
                         <p>{{ tanggal($invoice->due_date) }}</p>
                         {{-- <p>{{ tanggal($invoice->invoice_date) }}</p>
                         <p>{{ tanggal($invoice->due_date) }}</p> --}}
-                        <p>Tiffany Mareta<br>BCA (Bank Central Asia)<br>6600 356 117</p>
+                        <p>Michelle Velicia<br>BCA (Bank Central Asia)<br>639 000 8226</p>
                     </div>
                 </div>
             </div>
@@ -176,16 +176,16 @@
             <div class="flex right">
                 <div><img src="{{ asset('images/mich-signs.png') }}" alt=""></div>
                 <div class="tiffany">Michelle Velicia</div>
-                <div>Blue Sky Creation</div>
+                <div>Kokofibo Finance Department</div>
             </div>
         </div>
         <div>
             <hr>
         </div>
         <div class="footer">
-            <div><i class="fa-solid fa-globe fa-lg"></i></i> www.blueskycreation.id</div>
-            <div><i class="fa-brands fa-whatsapp fa-lg"></i> 087 780 620 632</div>
-            <div><i class="fa-regular fa-envelope fa-lg"></i> hello@blueskycreation.id</div>
+            <div><i class="fa-solid fa-globe fa-lg"></i></i> www.kokofibo.com.id</div>
+            <div><i class="fa-brands fa-whatsapp fa-lg"></i> 0877 265 888 36</div>
+            <div><i class="fa-regular fa-envelope fa-lg"></i> billing@kokofibo.com</div>
         </div>
     </div>
 
