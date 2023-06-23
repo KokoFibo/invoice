@@ -40,7 +40,7 @@ class InvoiceMail extends Mailable
         $invoice_number = invNumberFormat($this->number, $invoice->invoice_date);
         // $month = month($invoice->due_date);
         $month = getMonthName($invoice->due_date);
-        $subject = 'Invoice '.$invoice_number. ' '.$customer->company .' for ' . $month;
+        $subject = 'Invoice '.$invoice_number. ' - '.$customer->title. ' '.$customer->company;
 
         return new Envelope(
             subject: $subject,
@@ -59,13 +59,26 @@ class InvoiceMail extends Mailable
         $invoice = Invoice::where('number', $this->number)->first();
         $customer = Customer::where('id', $invoice->customer_id)->first();
         $invoice_number = invNumberFormat($this->number, $invoice->invoice_date);
+        // $subtotals = Invoice::where('number', $this->number)->get();
+        // foreach($subtotals as $subtotal) {
+        //     $jumlah = $jumlah + $subtotal->price * $subtotal->qty;
+        //     $diskon = $subtotal->discount;
+        //     $pajak = $subtotal->tax;
+        // }
+        // $total = $jumlah - $diskon - (($jumlah - $diskon)*$pajak/100);
+
+
+        $total = getTotal($this->number);
+
+
 
 
         return new Content(
             // view: 'pdf.invoiceEmailTemplate',
             view: 'pdf.invoiceEmailTemplate',
             with: ['title' => $customer->salutation,  'custName' => $customer->name, 'invoice_number' => $invoice_number,
-             'company' => $customer->company, 'due_date' => tanggal($invoice->due_date), 'invoice_date' => tanggal($invoice->invoice_date)
+             'company' => $customer->company, 'due_date' => tanggal($invoice->due_date), 'invoice_date' => tanggal($invoice->invoice_date),
+             'total' => $total
             ],
         );
     }

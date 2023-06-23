@@ -49,13 +49,38 @@
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
                     Invoice Details:
-                    Invoice Number: {{ $invoice_number }}
-                    Invoice Date: {{ $invoice_date }}
-                    Due Date: {{ $due_date }}
-                    Payment Method: Bank Transfer to
-                    Bank BCA
-                    Acc No : 639 000 8226
-                    Michelle Velicia
+                <table style="font-size: 16px;">
+                    <tr>
+                        <td>Invoice Number</td>
+                        <td>:</td>
+                        <td>{{ $invoice_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>Invoice Date</td>
+                        <td>:</td>
+                        <td>{{ $invoice_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Due Date</td>
+                        <td>:</td>
+                        <td>{{ $due_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Amount</td>
+                        <td>:</td>
+                        <td>IDR {{ number_format($total) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Method</td>
+                        <td>:</td>
+                        <td>Bank Transfer</td>
+                    </tr>
+                </table>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; Bank BCA</span>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acc No : 639 000 8226</span>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Michelle Velicia</span>
+
                 </p>
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
@@ -79,9 +104,9 @@
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
                     Best Regards,
 
-                    Kokofibo Web Developer
-                    0877 265 888 36
-                    <a href="https://kokofibo.com/">kokofibo.com</a>
+                    <br><br>Kokofibo Web Developer
+                    <br>0877 265 888 36
+                    <br><a href="https://kokofibo.com/">kokofibo.com</a>
                 </p>
             </div>
         </div>
