@@ -153,13 +153,13 @@
     <table style="margin-bottom: 25px">
         <tr>
             <td style="width: 15%"><b>Name</b></td>
-            <td style="width: 30%">{{ $customer->name }}</td>
+            <td style="width: 30%">{{ $customer->salutation }} {{ $customer->name }}</td>
             <td style="width: 15%"><b>Invoice Date</b></td>
             <td style="width: 15%">{{ tanggal($invoice->invoice_date) }}</td>
         </tr>
         <tr>
             <td style="width: 15%"><b>Company</b></td>
-            <td style="width: 30%">{{ $customer->company }}</td>
+            <td style="width: 30%">{{ $customer->title }} {{ $customer->company }}</td>
             <td style="width: 15%"><b>Due Date</b></td>
             <td style="width: 30%">{{ tanggal($invoice->due_date) }}</td>
         </tr>

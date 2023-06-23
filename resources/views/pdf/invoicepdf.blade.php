@@ -82,7 +82,7 @@
                 </div>
                 <div style="margin-left: 20px;">
                     <p>{{ $customer->salutation }} {{ $customer->name }}</p>
-                    <p>{{ $customer->company }}</p>
+                    <p>{{ $customer->title }} {{ $customer->company }}</p>
                     <p>{{ $customer->address }}</p>
                     @if ($contract_number != '-')
                         <p>{{ $contract_number }}</p>
