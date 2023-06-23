@@ -41,17 +41,17 @@ class InvoiceEmailController extends Controller
             $contract_number = '-';
         }
         $saveLocation = 'public/storage/pdf/';
-        $pdfFileName = 'BlueSkyCreation_' . invNumberFormat($number, $invoice->invoice_date) . '.pdf';
+        $pdfFileName = 'Kokofibo_Invoice_' . invNumberFormat($number, $invoice->invoice_date) . '.pdf';
         $footer = '<table style="width: 100%">
         <tr>
             <td style="width: 33%; text-align:left ;  ">
                 <img src="https://sky.blueskycreation.id/web.png" width="30px" style="width: 15px;">
-                www.blueskycreation.id
+                www.kokofibo.com
             </td>
             <td style="width: 33%; text-align:center"><img src="https://sky.blueskycreation.id/whatsapp.png"
-                    width="30px" style="width: 15px;"> 087 780 620 632</td>
+                    width="30px" style="width: 15px;"> 0877 265 888 36</td>
             <td style="width: 33%; text-align:right"><img src="https://sky.blueskycreation.id/email.png"
-                    width="30px" style="width: 15px;"> hello@blueskycreation.id</td>
+                    width="30px" style="width: 15px;"> billing@kokofibo.com</td>
         </tr>
     </table>';
 
@@ -71,7 +71,7 @@ class InvoiceEmailController extends Controller
         // return back();
         return back()->with('message' , 'PDF Generated');
     }
- 
+
     public function invoiceEmail ($number) {
         // Mail::to('kokonaci@gmail.com')->send(new InvoiceMail($number));
         try {
