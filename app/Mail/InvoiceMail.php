@@ -44,9 +44,9 @@ class InvoiceMail extends Mailable
 
         return new Envelope(
             subject: $subject,
-            cc: 'tiffany.blueskycreation@gmail.com',
-            bcc: 'info.blueskycreation@gmail.com',
-            from: new Address('info@blueskycreation.id', 'Blue Sky Creation'),
+            cc: 'kokonacci@gmail.com',
+            // bcc: 'info.blueskycreation@gmail.com',
+            from: new Address('billing@kokofibo.com', 'Kokofibo Billing Department'),
             to: $customer->email,
         );
     }
@@ -65,7 +65,7 @@ class InvoiceMail extends Mailable
             // view: 'pdf.invoiceEmailTemplate',
             view: 'pdf.invoiceEmailTemplate',
             with: ['title' => $customer->salutation,  'custName' => $customer->name, 'invoice_number' => $invoice_number,
-             'company' => $customer->company, 'due_date' => tanggal($invoice->due_date)
+             'company' => $customer->company, 'due_date' => tanggal($invoice->due_date), 'invoice_date' => tanggal($invoice->invoice_date)
             ],
         );
     }
@@ -89,16 +89,16 @@ class InvoiceMail extends Mailable
             $contract_number = '-';
             // dd($contract_number);
         }
-        $pdfFileName = 'BlueSkyCreation_' . invNumberFormat($this->number, $invoice->invoice_date) . '.pdf';
+        $pdfFileName = 'Kokofibo_Invoice_' . invNumberFormat($this->number, $invoice->invoice_date) . '.pdf';
         $footer = '<table style="width: 100%">
         <tr>
             <td style="width: 33%; text-align:left ;  ">
-                <img src="https://sky.blueskycreation.id/web.png" width="30px" style="width: 15px;">
+                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
                 www.blueskycreation.id
             </td>
-            <td style="width: 33%; text-align:center"><img src="https://sky.blueskycreation.id/whatsapp.png"
+            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
                     width="30px" style="width: 15px;"> 087 780 620 632</td>
-            <td style="width: 33%; text-align:right"><img src="https://sky.blueskycreation.id/email.png"
+            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
                     width="30px" style="width: 15px;"> hello@blueskycreation.id</td>
         </tr>
     </table>';

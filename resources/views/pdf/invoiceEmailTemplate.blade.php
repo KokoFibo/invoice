@@ -28,7 +28,7 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        <img src="https://sky.blueskycreation.id/invoice-header.jpg" style="display: block; width: 100%; height: auto" />
+        <img src="https://invoice.kokofibo.com/images/hello.jpg" style="display: block; width: 100%; height: auto" />
         <div class="card-content" style="padding: 50px; text-align: left; ">
             <div>
                 <p
@@ -43,20 +43,45 @@
                 </p>
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
-                    We hope you had a wonderful week!
+                    I hope this email finds you well. I am writing to provide you with the invoice for the web
+                    development services we have recently provided. Kindly find the invoice attached to this email.
                 </p>
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
-                    Please refer to the attached invoice number {{ $invoice_number }}
-                    for {{ $company }} social media activities the upcoming month, which
-                    is due for payment on {{ $due_date }}. We are grateful for your
-                    support during the previous month and hope we could have another
-                    great collaboration! The report of ads and contents for {{ $company }} will be sent to you
-                    soon. Please kindly wait for our next email.
+                    Invoice Details:
+                    Invoice Number: {{ $invoice_number }}
+                    Invoice Date: {{ $invoice_date }}
+                    Due Date: {{ $due_date }}
+                    Payment Method: Bank Transfer to
+                    Bank BCA
+                    Acc No : 639 000 8226
+                    Michelle Velicia
                 </p>
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
-                    Thank you and have a great day!
+                    We greatly appreciate the opportunity to work with you on your web development project. We are
+                    confident that the delivered services meet your expectations and requirements. Please review the
+                    invoice carefully and ensure that all details are accurate.
+                </p>
+
+                <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
+                    If you have any questions or require further clarification regarding the invoice or our services,
+                    please don't hesitate to reach out. We are more than happy to assist you in any way we can.
+                </p>
+                <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
+                    To process the payment, please refer to the payment instructions provided in the invoice. Once the
+                    payment is made, kindly notify us, and we will promptly update our records accordingly.
+                </p>
+                <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
+                    Thank you for choosing our web development services. We value your business and look forward to
+                    serving you again in the future.
+                </p>
+                <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
+                    Best Regards,
+
+                    Kokofibo Web Developer
+                    0877 265 888 36
+                    <a href="https://kokofibo.com/">kokofibo.com</a>
                 </p>
             </div>
         </div>
