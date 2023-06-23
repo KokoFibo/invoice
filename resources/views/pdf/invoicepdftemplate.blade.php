@@ -173,14 +173,14 @@
             @endif
 
             <td style="width: 15%"><b>Payment to</b></td>
-            <td style="width: 30%">Tiffany Mareta</td>
+            <td style="width: 30%">Michelle Velicia</td>
         </tr>
         <tr>
             <td style="vertical-align: top;"><b>Address</b></td>
             <td style="vertical-align: top;">{{ $customer->address }}</td>
             <td> </td>
             <td>
-                <p>BCA (Bank Central Asia)<br>6600 356 117</p>
+                <p>BCA (Bank Central Asia)<br>639 000 8226</p>
             </td>
         </tr>
         <tr>
@@ -271,7 +271,7 @@
             </td>
             <td style="vertical-align: bottom; text-align: right;">
                 <p style="text-align: center"><b>Michelle Velicia</b> <br>
-                    Blue Sky Creation</p>
+                    Kokofibo Billing Department</p>
             </td>
         </tr>
     </table>
