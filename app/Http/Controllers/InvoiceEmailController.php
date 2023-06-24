@@ -74,6 +74,9 @@ class InvoiceEmailController extends Controller
 
     public function invoiceEmail ($number) {
         // Mail::to('kokonaci@gmail.com')->send(new InvoiceMail($number));
+
+
+
         try {
             Mail::send(new InvoiceMail($number));
             $data = Invoice::where('number', $number)->get();
@@ -91,6 +94,7 @@ class InvoiceEmailController extends Controller
             return redirect( route('invoice'))->with('error', 'Fail Sending Email');
 
         }
+
     }
 
 
