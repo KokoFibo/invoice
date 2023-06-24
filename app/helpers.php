@@ -20,6 +20,15 @@ use App\Models\Quotation;
 // }
 
 
+function isEmailed($number) {
+    $isEmailed = Invoice::where('number', $number)->first();
+    if($isEmailed->status == 'Emailed'){
+        return true;
+    }else {
+        return false;
+    }
+}
+
 function getDetail($description)
 {
     if ($description != null) {

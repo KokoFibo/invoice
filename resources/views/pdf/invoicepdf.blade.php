@@ -35,12 +35,18 @@
 
             </div>
             <div class="flex flex-row gap-2">
-
+                @php
+                if(isEmailed($invoice->number) == false) {
+                @endphp
                 <div x-data="{ buttonDisabled: false }">
                     <a href="/invoiceEmail/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled"
                             class="px-2 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-700">Email</button></a>
                 </div>
+                @php
+                    }
+                @endphp
+
 
                 <div x-data="{ buttonDisabled: false }">
 
