@@ -49,10 +49,25 @@
                     <p class="text-3xl font-semibold">Created on</p>
                 </div>
                 <div class="flex gap-2">
-                    <div x-data="{ buttonDisabled: false }">
+                    {{-- <div x-data="{ buttonDisabled: false }">
+                        <a href="/quotationEmail/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
+                            x-bind:disabled="buttonDisabled" class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
+                    </div> --}}
+                @php
+                if(isEmailedQuotation($quotation->number) == false) {
+                @endphp
+                <div x-data="{ buttonDisabled: false }">
                         <a href="/quotationEmail/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled" class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
                     </div>
+                @php
+                    }
+                @endphp
+
+
+
+
+
                     <div x-data="{ buttonDisabled: false }">
 
                         <a href="/quotationpdf/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"

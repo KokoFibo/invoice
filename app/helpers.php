@@ -28,6 +28,14 @@ function isEmailed($number) {
         return false;
     }
 }
+function isEmailedQuotation($number) {
+    $isEmailed = Quotation::where('number', $number)->first();
+    if($isEmailed->status == 'Emailed'){
+        return true;
+    }else {
+        return false;
+    }
+}
 
 function getDetail($description)
 {
