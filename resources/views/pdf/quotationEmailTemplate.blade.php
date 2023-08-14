@@ -28,7 +28,7 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        <img src="https://invoice.kokofibo.com/images/quotation-header12.jpg"
+        <img src="https://invoice.kokofibo.com/images/quotation-header.jpg"
             style="display: block; width: 100%; height: auto" />
         <div class="card-content" style="padding: 50px; text-align: left; ">
             <div>
