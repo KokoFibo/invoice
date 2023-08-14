@@ -9,7 +9,7 @@
     <title>Quotation PDF</title>
     <style>
         body {
-            font-family: poppins;
+            font-family: poppins, sans-serif;
             color: #374151;
             width: 100%;
         }
@@ -28,8 +28,8 @@
                     <p style="font-size:15px">DETAILED OF PROVIDED SERVICES</p>
                 </td>
                 <td style="width:50%;  text-align: right">
-                    <img style="width:175px;  " src="https://kokofibo.com/images/logobsc.png" alt="logobsc"
-                        border="0" /></a>
+                    <img style="width:150px; " src="https://invoice.kokofibo.com/images/kokofibo logo.png"
+                        alt="kokofibo logo" border="0" /></a>
                 </td>
             </tr>
         </table>
@@ -62,9 +62,9 @@
         <table style="width:100%">
             <tr>
                 <td style="width:15%; font-size: 15px; font-weight: bold; ">Company</td>
-                <td style="width:35%; font-size: 15px;  ">{{ $customer->company }}</td>
+                <td style="width:35%; font-size: 15px;  ">{{ $customer->title }} {{ $customer->company }}</td>
                 <td style="width:15%; font-size: 15px; font-weight: bold; ">Number</td>
-                <td style="width:35%; font-size: 15px;  ">{{ getQuotationNumber($quotation->number) }}</td>
+                <td style="width:35%; font-size: 15px;  ">{{ showQuotationNumber($quotation->number) }}</td>
             </tr>
         </table>
         <br>
@@ -101,8 +101,12 @@
                                 $desc = getDetail($q->description);
                             @endphp
                             <ul>
+
+                                @php
+                                    $cols = 40;
+                                @endphp
                                 @foreach ($desc as $d)
-                                    <li> <em> {{ $d }}</em></li>
+                                    <em> {{ $d }}</em>
                                 @endforeach
                             </ul>
                         </td>
@@ -141,184 +145,153 @@
         </table> --}}
 
         <pagebreak />
-        {{--  Media Package  --}}
-        <table style=" font-size: 13.5px; width:100%; border: 1px solid #999; line-height: 1.1;">
-            <tr>
-                <td colspan="2"
-                    style=" border-bottom: 1px solid #999; background-color:#d9eaf7; line-height: 1.6;
-                    width:100%; text-align: center;">
-                    <b>Work Process</b><br>Social
-                    Media Package
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding: 10px 7px 5px 7px;"><b>Step 1 : </b> Contract</td>
-                <td style="padding: 10px 7px 5px 7px;"><b>Step 4 : </b> Design and Development</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Where the client has determined the desired</td>
-                <td style="padding: 2px 7px 1px 7px;">Our team will create the plan, strategies,</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">package and signed the contract</td>
-                <td style="padding: 2px 7px 1px 7px;">designs, and copy write of the project</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 2 : </b> Advance Payment</td>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 5 : </b> Execution</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Due to the nature of the services, we need</td>
-                <td style="padding: 2px 7px 1px 7px;">Where the plan is put into action by our team</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">full advance payment to start the project</td>
-                <td style="padding: 2px 7px 1px 7px;">for your brand’s social media account</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 3 : </b> Visual Concept</td>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 6 : </b> Report</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Setting up the visual concept of your brand’s</td>
-                <td style="padding: 2px 7px 1px 7px;">The report & evaluation of the project will be</td>
-            </tr>
-            <tr>
-                <td style="padding: 5px 7px 10px 7px;">social media as a guideline for the project</td>
-                <td style="padding: 5px 7px 10px 7px;">released at the end of every month</td>
-            </tr>
-
-        </table>
-        <br>
-        <br>
-        {{--  PER PROJECT  --}}
-        <table style=" font-size: 13.5px; width:100%; border: 1px solid #999; line-height: 1.1;">
-            <tr>
-                <td colspan="2"
-                    style=" border-bottom: 1px solid #999; background-color:#d9eaf7; line-height: 1.6;
-                    width:100%; text-align: center;">
-                    <b>Work Process</b><br>Social
-                    PER PROJECT
-                </td>
-            </tr>
-
-            <tr>
-                <td style="padding: 10px 7px 5px 7px;"><b>Step 1 : </b> Initiation</td>
-                <td style="padding: 10px 7px 5px 7px;"><b>Step 4 : </b> Brief</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Where client defines and interpret the</td>
-                <td style="padding: 2px 7px 1px 7px;">A description of key elements and detailed</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">details of the request</td>
-                <td style="padding: 2px 7px 1px 7px;">requirements of the project</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 2 : </b> Quotation</td>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 5 : </b> Execution</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Our team will send you the estimation</td>
-                <td style="padding: 2px 7px 1px 7px;">Where the brief and the plan are put</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">of your requested project</td>
-                <td style="padding: 2px 7px 1px 7px;">into action by our Team</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 3 : </b> Advance Payment</td>
-                <td style="padding: 2px 7px 1px 7px;"><b>Step 6 : </b> Completion</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">Due to the nature of the services, we need</td>
-                <td style="padding: 2px 7px 1px 7px;">Where we release the final deliverables</td>
-            </tr>
-            <tr>
-                <td style="padding: 5px 7px 10px 7px;">full advance payment to start the project</td>
-                <td style="padding: 5px 7px 10px 7px;">of the project to the client</td>
-            </tr>
-        </table>
 
         <br>
-        <br>
-        {{--  TERMS AND CONDITIONS  --}}
+        {{-- <br> --}}
+        {{--  Work Process  --}}
         <table style=" font-size: 13.5px; width:100%; border: 1px solid #999; line-height: 1.1;">
             <tr>
                 <td colspan="2"
                     style=" border-bottom: 1px solid #999; background-color:#d9eaf7; line-height: 3.2;
-                    width:100%; text-align: center;">
-                    <b>TERMS AND CONDITIONS</b>
+                width:100%; text-align: center;padding:5px;">
+                    <span style="letter-spacing: 5px; font-weight: bold; font-size:17px;">Work Process</span>
                 </td>
             </tr>
 
             <tr>
-                <td style="padding: 10px 7px 5px 7px;"><b>Tax</b></td>
-                <td style="padding: 10px 7px 5px 7px;"><b>Monthly Services</b></td>
+                <td colspan="2" style="padding: 10px 7px 5px 7px"><b>Step 1</b> Initiation</td>
             </tr>
             <tr>
-                <td style="padding: 2px 7px 1px 7px;">The prices mentioned above does not</td>
-                <td style="padding: 2px 7px 1px 7px;">The services of our social media packages are</td>
+                <td colspan="2" style="padding: 0 7px">Client defines and interpret the details of the
+                    request </td>
             </tr>
             <tr>
-                <td style="padding: 2px 7px 1px 7px;">include tax</td>
-                <td style="padding: 2px 7px 1px 7px;">provided per month & cannot be accumulated</td>
-            </tr>
-            <tr>
-                <td style="padding: 2px 7px 1px 7px;">
-                    <hr>
-                </td>
-                <td style="padding: 2px 7px 1px 7px;">
+                <td colspan="2">
                     <hr>
                 </td>
             </tr>
+
             <tr>
-                <td style="padding: 2px 7px 1px 7px;"><b>Revisions</b></td>
-                <td style="padding: 2px 7px 1px 7px;"><b>Contract Period</b></td>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 2</b> Quotation</td>
             </tr>
             <tr>
-                <td style="padding: 2px 7px 1px 7px;">The services include 1x major revision and 2x</td>
-                <td style="padding: 2px 7px 1px 7px;">Our social media packages comes with a</td>
+                <td colspan="2" style="padding: 0 7px">Our team will send you the estimation of your requested
+                    project</td>
             </tr>
             <tr>
-                <td style="padding: 5px 7px 10px 7px;">minor revisions. No photo/video shoot revisions</td>
-                <td style="padding: 5px 7px 10px 7px;">minimum of 3 months contract</td>
+                <td colspan="2">
+                    <hr>
+                </td>
             </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 3</b> Contract</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">client has determined the desired package and signed
+                    the contract</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 4</b> Down Payment</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">Due to the nature of the services, we need 50% of
+                    down payment to start the project</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 5</b> Brief</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">A description of key elements and detailed
+                    requirements of the project</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 6</b> Development</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">Our team begin to develop the project </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Step 7</b> Completion</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 10px 7px">We release the final deliverables of the project to
+                    the client </td>
+            </tr>
+
+
+
+
 
         </table>
+        {{--  TERMS AND CONDITIONS  --}}
+        {{-- <table style=" font-size: 13.5px; width:100%; border: 1px solid #999; line-height: 1.1;margin-top:50px;">
+            <tr>
+                <td colspan="2"
+                    style=" border-bottom: 1px solid #999; background-color:#d9eaf7; line-height: 3.2;
+                width:100%; text-align: center;padding:5px;">
+                    <span style="letter-spacing: 5px; font-weight: bold; font-size:17px;">TERMS AND CONDITIONS</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="padding: 10px 7px 5px 7px"><b>Revisions</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">The services include 1x major revision and 2x
+                    minor revisions.
+                    No photo/video shoot revisions</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Monthly Services</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px">The services of our social media packages are
+                    provided per month & cannot be accumulated.</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 5px 7px"><b>Contract Period</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding: 0 7px 10px 7px">Our social media packages comes with a minimum
+                    of 3 months contract.</td>
+
+            </tr>
+
+
+
+
+        </table> --}}
     </div>
 </body>
 

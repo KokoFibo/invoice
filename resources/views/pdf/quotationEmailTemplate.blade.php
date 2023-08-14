@@ -28,7 +28,7 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        <img src="https://sky.blueskycreation.id/quotation-header.jpg"
+        <img src="https://invoice.kokofibo.com/images/quotation-header.jpg"
             style="display: block; width: 100%; height: auto" />
         <div class="card-content" style="padding: 50px; text-align: left; ">
             <div>
@@ -60,6 +60,13 @@
 
                 <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
                     Thank you and have a wonderful day
+                </p>
+                <p style="font-size: 16px; line-height: 2; margin-bottom: 0">
+                    <br>
+                    Best Regards,<br><br>
+                    Anton<br>
+                    www.kokofibo.com
+
                 </p>
             </div>
         </div>

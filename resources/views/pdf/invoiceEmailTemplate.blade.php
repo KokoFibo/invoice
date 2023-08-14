@@ -28,7 +28,8 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        <img src="https://invoice.kokofibo.com/images/hello.jpg" style="display: block; width: 100%; height: auto" />
+        <img src="https://invoice.kokofibo.com/images/invoice-header.jpg"
+            style="display: block; width: 100%; height: auto" />
         <div class="card-content" style="padding: 50px; text-align: left; ">
             <div>
                 <p
@@ -77,9 +78,9 @@
                     </tr>
                 </table>
                 <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp;
-                    &nbsp; &nbsp; Bank BCA</span>
-                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acc No : 639 000 8226</span>
-                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Michelle Velicia</span>
+                    &nbsp; &nbsp; Bank Permata</span>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acc No : 4000 68 56 88</span>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Phang Esti Anton</span>
 
                 </p>
 

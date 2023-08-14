@@ -12,7 +12,7 @@
 </head>
 <style>
     body {
-        font-family: poppins;
+        font-family: poppins, sans-serif;
     }
 </style>
 <body class="w-5/6 mx-auto mt-10 text-gray-700 ">
@@ -22,7 +22,8 @@
             <h1 class="font-semibold text-8xl">QUOTATION</h1>
             <p class="mt-3 text-3xl tracking-wide">DETAILED OF PROVIDED SERVICES</p>
         </div>
-        <h1><img src="{{ asset('images/Blue Sky Creations.png') }}" alt="" width="300px"></h1>
+        <h1><img src="{{ asset('images/kokofibo logo.png') }}" style="width:250px" alt=""></h1>
+
     </div>
     <div class="flex gap-16 mt-12">
         <div class="w-1/2">
@@ -35,8 +36,9 @@
                     <p class="mt-5 text-3xl font-semibold">Company</p>
                 </div>
                 <div>
-                    <p class="text-3xl">{{ $customer->name }}</p>
-                    <p class="mt-5 text-3xl">{{ $customer->company }}</p>
+                    <p class="text-3xl">{{ $customer->salutation }} {{ $customer->name }}</p>
+
+                    <p class="mt-5 text-3xl">{{ $customer->title }} {{ $customer->company }}</p>
                 </div>
             </div>
 
@@ -47,10 +49,25 @@
                     <p class="text-3xl font-semibold">Created on</p>
                 </div>
                 <div class="flex gap-2">
-                    <div x-data="{ buttonDisabled: false }">
+                    {{-- <div x-data="{ buttonDisabled: false }">
+                        <a href="/quotationEmail/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
+                            x-bind:disabled="buttonDisabled" class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
+                    </div> --}}
+                @php
+                if(isEmailedQuotation($quotation->number) == false) {
+                @endphp
+                <div x-data="{ buttonDisabled: false }">
                         <a href="/quotationEmail/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled" class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
                     </div>
+                @php
+                    }
+                @endphp
+
+
+
+
+
                     <div x-data="{ buttonDisabled: false }">
 
                         <a href="/quotationpdf/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
@@ -69,7 +86,7 @@
                 </div>
                 <div>
                     <p class="text-3xl">{{ tanggal($quotation->quotation_date) }}</p>
-                    <p class="mt-5 text-3xl">{{ getQuotationNumber($quotation->number) }}</p>
+                    <p class="mt-5 text-3xl">{{ showQuotationNumber($quotation->number) }}</p>
                 </div>
             </div>
         </div>
@@ -106,11 +123,13 @@
                                         @php
                                         foreach ($desc as $de) {
                                             @endphp
-                                            <li class="list-disc">
+                                            {{-- <li class="list-disc"> --}}
+                                                <textarea >
                                                 @php
                                                 echo $de;
                                                 @endphp
-                                            </li>
+                                            </textarea>
+                                            {{-- </li> --}}
                                             @php
                                         }
                                         @endphp
