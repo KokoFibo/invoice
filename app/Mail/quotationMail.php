@@ -38,12 +38,12 @@ class quotationMail extends Mailable
         $quotation_number = quoNumberFormat($this->number, $quotation->quotation_date);
         // $month = month($invoice->due_date);
         $month = getMonthName($quotation->due_date);
-        $subject = 'Quotation '.$quotation_number. ' for '.$customer->company;
+        $subject = 'Quotation '.$quotation_number. ' for '.$customer->title. ' '.$customer->company;;
         return new Envelope(
             subject: $subject,
             // cc: 'tiffany.blueskycreation@gmail.com',
             // bcc: 'info.blueskycreation@gmail.com',
-            from: new Address('hello@kokofibo.com', 'Kokofibo.com'),
+            from: new Address('hello@kokofibo.com', 'Kokofibo Marketing Department'),
             to: $customer->email,
         );
     }

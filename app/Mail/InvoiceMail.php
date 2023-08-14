@@ -40,11 +40,10 @@ class InvoiceMail extends Mailable
         $invoice_number = invNumberFormat($this->number, $invoice->invoice_date);
         // $month = month($invoice->due_date);
         $month = getMonthName($invoice->due_date);
-        $subject = 'Invoice '.$invoice_number. ' - '.$customer->title. ' '.$customer->company;
+        $subject = 'Invoice '.$invoice_number. ' for '.$customer->title. ' '.$customer->company;
 
         return new Envelope(
             subject: $subject,
-            bcc: 'kokonacci@gmail.com',
             // bcc: 'info.blueskycreation@gmail.com',
             from: new Address('billing@kokofibo.com', 'Kokofibo Billing Department'),
             to: $customer->email,
@@ -107,12 +106,12 @@ class InvoiceMail extends Mailable
         <tr>
             <td style="width: 33%; text-align:left ;  ">
                 <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
-                www.blueskycreation.id
+                www.kokofibo.com
             </td>
             <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
                     width="30px" style="width: 15px;"> 087 780 620 632</td>
             <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
-                    width="30px" style="width: 15px;"> hello@blueskycreation.id</td>
+                    width="30px" style="width: 15px;"> hello@kokofibo.com</td>
         </tr>
     </table>';
         $mpdf = new \Mpdf\Mpdf();
