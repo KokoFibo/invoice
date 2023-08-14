@@ -108,7 +108,7 @@
                         <p>{{ tanggal($invoice->due_date) }}</p>
                         {{-- <p>{{ tanggal($invoice->invoice_date) }}</p>
                         <p>{{ tanggal($invoice->due_date) }}</p> --}}
-                        <p>Michelle Velicia<br>BCA (Bank Central Asia)<br>639 000 8226</p>
+                        <p>Phang Esti Anton<br>Bank Permata<br>4000 68 56 88</p>
                     </div>
                 </div>
             </div>

@@ -144,6 +144,27 @@ function getQuotationNumber()
 
     return 'QUO' . strval($year - 2000) . (string) $month . (string) $data;
 }
+
+function showQuotationNumber($number)
+{
+    $now = Carbon::now();
+    $year = $now->year;
+    $month = $now->month;
+    if ($month < 10) {
+        $month = '0' . (string) $month;
+    }
+    // $data = Quotation::withTrashed()->max('number') + 1;
+    $data = $number;
+    if ($data < 10) {
+        $data = '0' . (string) $data;
+    }
+
+    return 'QUO' . strval($year - 2000) . (string) $month . (string) $data;
+}
+
+
+
+
 function getContractNumber()
 {
     $now = Carbon::now();

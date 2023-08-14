@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            font-family: "poppins";
+            font-family: "poppins", sans-serif;
             color: #3e3e3f;
             /* font-size: 10px; */
         }
@@ -173,14 +173,14 @@
             @endif
 
             <td style="width: 15%"><b>Payment to</b></td>
-            <td style="width: 30%">Michelle Velicia</td>
+            <td style="width: 30%">Phang Esti Anton</td>
         </tr>
         <tr>
             <td style="vertical-align: top;"><b>Address</b></td>
             <td style="vertical-align: top;">{{ $customer->address }}</td>
             <td> </td>
             <td>
-                <p>BCA (Bank Central Asia)<br>639 000 8226</p>
+                <p>Bank Permata<br>4000 68 56 88</p>
             </td>
         </tr>
         <tr>
@@ -271,7 +271,7 @@
             </td>
             <td style="vertical-align: bottom; text-align: right;">
                 <p style="text-align: center"><b>Michelle Velicia</b> <br>
-                    Kokofibo Billing Department</p>
+                    Kokofibo Finance Department</p>
             </td>
         </tr>
     </table>

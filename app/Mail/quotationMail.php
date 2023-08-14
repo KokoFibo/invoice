@@ -41,9 +41,9 @@ class quotationMail extends Mailable
         $subject = 'Quotation '.$quotation_number. ' for '.$customer->company;
         return new Envelope(
             subject: $subject,
-            cc: 'tiffany.blueskycreation@gmail.com',
-            bcc: 'info.blueskycreation@gmail.com',
-            from: new Address('info@blueskycreation.id', 'Blue Sky Creation'),
+            // cc: 'tiffany.blueskycreation@gmail.com',
+            // bcc: 'info.blueskycreation@gmail.com',
+            from: new Address('hello@kokofibo.com', 'Kokofibo.com'),
             to: $customer->email,
         );
     }
@@ -74,17 +74,17 @@ class quotationMail extends Mailable
         $quotations = Quotation::where('number', $this->number)->get();
         $quotation = Quotation::where('number', $this->number)->first();
         $customer = Customer::find($quotation->customer_id);
-        $pdfFileName = 'BlueSkyCreation_' . quoNumberFormat($this->number, $quotation->quotation_date) . '.pdf';
+        $pdfFileName = 'Kokofibo_' . quoNumberFormat($this->number, $quotation->quotation_date) . '.pdf';
         $footer = '<table style="width: 100%">
         <tr>
             <td style="width: 33%; text-align:left ;  ">
-                <img src="https://sky.blueskycreation.id/web.png" width="30px" style="width: 15px;">
-                www.blueskycreation.id
+                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
+                www.kokofibo.com
             </td>
-            <td style="width: 33%; text-align:center"><img src="https://sky.blueskycreation.id/whatsapp.png"
-                    width="30px" style="width: 15px;"> 087 780 620 632</td>
-            <td style="width: 33%; text-align:right"><img src="https://sky.blueskycreation.id/email.png"
-                    width="30px" style="width: 15px;"> hello@blueskycreation.id</td>
+            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
+                    width="30px" style="width: 15px;"> 0877 2658 8836</td>
+            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
+                    width="30px" style="width: 15px;"> hello@kokofibo.com</td>
         </tr>
     </table>';
         $mpdf = new \Mpdf\Mpdf();
