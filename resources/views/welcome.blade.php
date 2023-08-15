@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blue Sky</title>
+    <title>Kokofibo</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -863,7 +863,7 @@
         @endif
 
         <div class="text-2xl text-center lg:text-5xl ">
-            Blue Sky's Web v 1.0
+            Kokofibo Invoicing System v 1.0
         </div>
     </div>
 </body>
