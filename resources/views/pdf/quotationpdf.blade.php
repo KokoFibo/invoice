@@ -86,7 +86,7 @@
                 </div>
                 <div>
                     <p class="text-3xl">{{ tanggal($quotation->quotation_date) }}</p>
-                    <p class="mt-5 text-3xl">{{ showQuotationNumber($quotation->number) }}</p>
+                    <p class="mt-5 text-3xl">{{ quoNumberFormat($quotation->number, $quotation->quotation_date) }}</p>
                 </div>
             </div>
         </div>
