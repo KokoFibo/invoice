@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pdftemplate/{number}', [InvoiceEmailController::class, 'index']);
     Route::get('/pdf/{number}', [InvoiceEmailController::class, 'pdf']);
+    Route::get('/pdfNoSignature/{number}', [InvoiceEmailController::class, 'pdfNoSignature']);
     Route::get('/emailinvoice/{number}', [InvoiceEmailController::class, 'emailinvoice']);
     Route::get('/invoiceEmail/{number}', [InvoiceEmailController::class, 'invoiceEmail']);
 

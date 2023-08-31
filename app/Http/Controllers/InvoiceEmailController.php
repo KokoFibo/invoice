@@ -29,6 +29,48 @@ class InvoiceEmailController extends Controller
         return view('pdf.invoicepdf', compact(['invoices', 'invoice', 'customer', 'contract_number']));
     }
 
+    public function pdfNoSignature ($number) {
+        $invoices = Invoice::where('number', $number)->get();
+        $invoice = Invoice::where('number', $number)->first();
+        $customer = Customer::find($invoice->customer_id);
+        $contract = Contract::where('contract_number', $invoice->contract)->first();
+        if( $contract != ''){
+            $contract_number = contractNumberFormat($contract->contract_number, $contract->contract_date);
+        } else {
+            $contract_number = '-';
+        }
+        $saveLocation = 'public/storage/pdf/';
+        $pdfFileName = 'Kokofibo_Invoice_' . invNumberFormat($number, $invoice->invoice_date) . '.pdf';
+        $footer = '<table style="width: 100%">
+        <tr>
+            <td style="width: 33%; text-align:left ;  ">
+                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
+                www.kokofibo.com
+            </td>
+            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
+                    width="30px" style="width: 15px;"> 0877 265 888 36</td>
+            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
+                    width="30px" style="width: 15px;"> billing@kokofibo.com</td>
+        </tr>
+    </table>';
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->SetFooter($footer);
+
+        ob_get_clean();
+        $data['email'] = 'testaja@testaja.com';
+        $data['subject'] = 'ini adalah title atau judulnya';
+        $data['body'] = 'ini adalah body atau isi dari emailnya';
+
+        $html = view('pdf.invoicepdftemplateNoSignature', compact(['invoices', 'invoice', 'customer', 'contract_number']));
+        $mpdf->WriteHTML($html);
+
+        $mpdf->Output($pdfFileName,\Mpdf\Output\Destination::DOWNLOAD);
+        // $request->session()->flash('message', 'PDF Generated');
+        // return back();
+        return back()->with('message' , 'PDF Generated');
+    }
+
     public function pdf($number)
     {
         $invoices = Invoice::where('number', $number)->get();
