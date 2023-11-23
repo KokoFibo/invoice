@@ -21,27 +21,35 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        DB::table('packages')->insert(
-            [
-                'package' => 'Standard Package 15-20',
-                'price' => '4500000',
-                'description' => 'Editorial monthly plan, 15 Instagram Feed, 4 Series Instagram Story (5 pg/ series), Digital campaign (optional), Copywriting, 15x Instagram Feed posting, 4x Instagram Story posting, Facebook & Instagram integration, Advertising placement from FB Ads Manager (not incl budget), Monthly content report, Monthly Ads report'
-            ]
-        );
-        DB::table('packages')->insert(
-            [
-                'package' => 'Corporate Package 30-40',
-                'price' => '9000000',
-                'description' => 'Editorial monthly plan, 30 Instagram Feed, 8 Series Instagram Story (5 pg/ series), Digital campaign (optional), Copywriting, 30x Instagram Feed posting, 8x Instagram Story posting, Facebook & Instagram integration, Advertising placement from FB Ads Manager (not incl budget), Monthly content report, Monthly Ads report'
-            ]
-        );
-        DB::table('packages')->insert(
-            [
-                'package' => 'UMKM 12 with Photography',
-                'price' => '3500000',
-                'description' => 'Editorial monthly plan, 12 Instagram Feed, 4 Series Instagram Story (3 pg/ series), Copywriting, 12x Instagram Feed posting, 4x Instagram Story posting, Max 3 Ads proposals with FB Ads Manager (Not incld budget or payment method) , Monthly content report, Monthly content report'
-            ]
-        );
+        User::create([
+            'name' => 'Anton',
+            'email' => 'kokonacci@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Anton888'), // 123456789
+            'remember_token' => Str::random(10),
+        ]);
+
+        // DB::table('packages')->insert(
+        //     [
+        //         'package' => 'Standard Package 15-20',
+        //         'price' => '4500000',
+        //         'description' => 'Editorial monthly plan, 15 Instagram Feed, 4 Series Instagram Story (5 pg/ series), Digital campaign (optional), Copywriting, 15x Instagram Feed posting, 4x Instagram Story posting, Facebook & Instagram integration, Advertising placement from FB Ads Manager (not incl budget), Monthly content report, Monthly Ads report'
+        //     ]
+        // );
+        // DB::table('packages')->insert(
+        //     [
+        //         'package' => 'Corporate Package 30-40',
+        //         'price' => '9000000',
+        //         'description' => 'Editorial monthly plan, 30 Instagram Feed, 8 Series Instagram Story (5 pg/ series), Digital campaign (optional), Copywriting, 30x Instagram Feed posting, 8x Instagram Story posting, Facebook & Instagram integration, Advertising placement from FB Ads Manager (not incl budget), Monthly content report, Monthly Ads report'
+        //     ]
+        // );
+        // DB::table('packages')->insert(
+        //     [
+        //         'package' => 'UMKM 12 with Photography',
+        //         'price' => '3500000',
+        //         'description' => 'Editorial monthly plan, 12 Instagram Feed, 4 Series Instagram Story (3 pg/ series), Copywriting, 12x Instagram Feed posting, 4x Instagram Story posting, Max 3 Ads proposals with FB Ads Manager (Not incld budget or payment method) , Monthly content report, Monthly content report'
+        //     ]
+        // );
 
         // DB::table('contracts')->insert(
         //     [
