@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -29,13 +30,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        // DB::table('packages')->insert(
-        //     [
-        //         'package' => 'Standard Package 15-20',
-        //         'price' => '4500000',
-        //         'description' => 'Editorial monthly plan, 15 Instagram Feed, 4 Series Instagram Story (5 pg/ series), Digital campaign (optional), Copywriting, 15x Instagram Feed posting, 4x Instagram Story posting, Facebook & Instagram integration, Advertising placement from FB Ads Manager (not incl budget), Monthly content report, Monthly Ads report'
-        //     ]
-        // );
+
         // DB::table('packages')->insert(
         //     [
         //         'package' => 'Corporate Package 30-40',
