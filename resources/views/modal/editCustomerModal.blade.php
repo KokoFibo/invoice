@@ -12,8 +12,8 @@
                 <input type="text" id="name" type="text" name="name" required wire:model="name"
                     autocomplete="name"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('name')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -27,8 +27,8 @@
                     <option value="Ms">Ms.</option>
 
                 </select>
-                <x-input-error :messages="$errors->get('salutation')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('salutation')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -37,8 +37,8 @@
                 <input type="text" id="company" type="text" name="company" required wire:model="company"
                     autocomplete="company"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <x-input-error :messages="$errors->get('company')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('company')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -48,8 +48,8 @@
                     autocomplete="company"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                <x-input-error :messages="$errors->get('title')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('title')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -61,8 +61,8 @@
 
 
 
-                <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('address')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -71,8 +71,8 @@
                 <input type="text" id="mobile" type="text" name="mobile" required wire:model="mobile"
                     autocomplete="mobile"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <x-input-error :messages="$errors->get('mobile')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('mobile')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -81,8 +81,8 @@
                 <input type="text" id="email" type="text" name="email" required wire:model="email"
                     autocomplete="email"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
             <div class="flex ">
                 <span
                     class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -91,12 +91,13 @@
                 <input type="text" id="notes" type="text" name="notes" required wire:model="notes"
                     autocomplete="notes"
                     class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block  min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <x-input-error :messages="$errors->get('notes')" class="mt-2" />
             </div>
+            <x-input-error :messages="$errors->get('notes')" class="mt-2" />
         </div>
 
         <div class="flex justify-between">
-            <x-blue-button class="m-3" @click="editCustomer=false" wire:click="updateCustomer">
+            {{-- <x-blue-button class="m-3" @click="editCustomer=false" wire:click="updateCustomer"> --}}
+            <x-blue-button class="m-3" wire:click="updateCustomer">
                 {{ __('Update') }}
             </x-blue-button>
             <x-primary-button class="m-3" @click="editCustomer=false" wire:click="clear">
