@@ -1,4 +1,7 @@
 <div x-cloak x-data="{ addPackage: false, editPackage: false }">
+    @section('title')
+        Packages
+    @endsection
     <h1 class="my-5 text-2xl font-semibold text-center">Packages</h1>
 
     <div class="relative px-10 mt-5 overflow-x-auto">

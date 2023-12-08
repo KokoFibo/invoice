@@ -1,4 +1,7 @@
 <div x-cloak x-data="{ addCustomer: false, editCustomer: false }">
+    @section('title')
+        Customer
+    @endsection
 
     <h1 class="my-5 text-2xl font-semibold text-center">Customer Data</h1>
     {{-- per Page --}}
