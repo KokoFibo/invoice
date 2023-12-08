@@ -1,4 +1,4 @@
-<div x-show="editCustomer" class="w-3/4" x-cloak>
+<div wire:ignore.self x-show="editCustomer" class="w-3/4" x-cloak>
     <x-modalCustomer>
         <h2 class="mt-3 text-2xl font-semibold text-center">Update Customer Data</h2>
         <hr class="px-3 my-2">
