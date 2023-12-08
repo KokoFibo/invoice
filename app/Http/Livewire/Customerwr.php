@@ -54,6 +54,7 @@ class Customerwr extends Component
     }
 
     public function updateCustomer () {
+        $this->validate();
         $data = Customer::find($this->idCustomer);
         $data->name = $this->name;
         $data->salutation = $this->salutation;
@@ -81,8 +82,20 @@ class Customerwr extends Component
         $this->notes = '';
     }
 
+    protected $rules = [
+        'name' => 'required',
+        'salutation' => 'required',
+        'title' => 'required',
+        'company' => 'nullable',
+        'address' => 'nullable',
+        'mobile' => 'required',
+        'email' => 'required' ,
+        'notes' => 'nullable',
+    ];
+
 
     public function saveCustomer () {
+        $this->validate();
         $data = new Customer();
         $data->name = $this->name;
         $data->salutation = $this->salutation;
