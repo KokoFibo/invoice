@@ -19,20 +19,33 @@ use App\Models\Quotation;
 //     }
 // }
 
+function convert_numeric($number)
+{
+    $number = trim($number, "Rp\u{A0}");
+    $arrNumber = explode('.', $number);
+    $numberString = '';
+    for ($i = 0; $i < count($arrNumber); $i++) {
+        $numberString = $numberString . $arrNumber[$i];
+    }
+    return (int) $numberString;
+}
 
-function isEmailed($number) {
+
+function isEmailed($number)
+{
     $isEmailed = Invoice::where('number', $number)->first();
-    if($isEmailed->status == 'Emailed'){
+    if ($isEmailed->status == 'Emailed') {
         return true;
-    }else {
+    } else {
         return false;
     }
 }
-function isEmailedQuotation($number) {
+function isEmailedQuotation($number)
+{
     $isEmailed = Quotation::where('number', $number)->first();
-    if($isEmailed->status == 'Emailed'){
+    if ($isEmailed->status == 'Emailed') {
         return true;
-    }else {
+    } else {
         return false;
     }
 }
@@ -116,7 +129,7 @@ function dueDate()
     $ymd = DateTime::createFromFormat('Y-m-d', $duedate)->format('Y-m-d');
     //   return Carbon::parse($ymd);
 
-        // Carbon::now()->subDays(30)
+    // Carbon::now()->subDays(30)
 
     return $ymd;
 }
@@ -260,7 +273,7 @@ function contractNumberFormat($number, $date)
         } else {
             $data = (string) $number;
         }
-        return 'C/' . strval((int) $year - 2000) . $month . '/'. $data;
+        return 'C/' . strval((int) $year - 2000) . $month . '/' . $data;
     }
 }
 function quoNumberFormat($number, $quoDate)
@@ -287,8 +300,9 @@ function roundedTotal($subtotal, $discount, $tax)
     }
     return $total = round(((($subtotal - $discount) / (100 - $tax)) * 100) / 1000) * 1000;
 }
-function getQuotationData ($number) {
-    if($number != null) {
+function getQuotationData($number)
+{
+    if ($number != null) {
         $data = Quotation::where('number', $number)->get();
         return $data;
     }
@@ -298,11 +312,13 @@ function getQuotationData ($number) {
 
 
 
-function tanggal_with_hari($tgl){
+function tanggal_with_hari($tgl)
+{
     return date('D, d M Y', strtotime($tgl));
 }
-function tanggal_with_Jam($tgl){
-    if($tgl == null) {
+function tanggal_with_Jam($tgl)
+{
+    if ($tgl == null) {
         return '-';
     } else {
 

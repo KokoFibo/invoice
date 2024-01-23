@@ -11,8 +11,8 @@
         </div>
         <div class="p-3">
             <x-input-label for="price" :value="__('Price')" />
-            <x-text-input id="price" class="block w-full mt-1" type="text" name="price" :value="old('price')"
-                required wire:model="price" autofocus autocomplete="price" />
+            <x-text-input id="price" class="block w-full mt-1" type="text" type-currency="IDR" name="price"
+                :value="old('price')" required wire:model="price" autofocus autocomplete="price" />
             <x-input-error :messages="$errors->get('price')" class="mt-2" />
         </div>
         <div class="p-3">
