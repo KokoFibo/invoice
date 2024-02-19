@@ -207,7 +207,21 @@
                 @endphp
                 @foreach ($invoices as $i)
                     <tr>
-                        <td style="padding: 15 15px 0 15px" class="garis">{{ $i->package }}</td>
+                        {{-- <td style="padding: 15 15px 0 15px" class="garis">{{ $i->package }}</td> --}}
+                        @if (is_koma($i->package))
+                            <td style="padding: 15 15px 0 15px" class="garis">
+                                @php
+                                                                                                                                                        $data = explode(',', $i->package);
+                                                                                                                                                        foreach($data as $d) {
+                                                                                                                                        @endphp
+                                {{ $d }} <br>
+                                @php
+                                                                                                                                                        }
+                                                                                                                                        @endphp
+                            </td>
+                        @else
+                            <td style="padding: 15 15px 0 15px" class="garis">{{ $i->package }}</td>
+                        @endif
                         <td class="garis package">{{ $i->qty }} {{ $i->qty > 1 ? 'Packages' : 'Package' }}
                         </td>
                         <td style="padding: 15 15px 0 15px" class="garis rupiah">IDR

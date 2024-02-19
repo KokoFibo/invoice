@@ -36,23 +36,24 @@
             </div>
             <div class="flex flex-row gap-2">
                 @php
-                if(isEmailed($invoice->number) == false) {
-                @endphp
+                                                                                                                                                                                                                                                                if(isEmailed($invoice->number) == false) {
+                                                                                                                                                                                                                @endphp
                 <div x-data="{ buttonDisabled: false }">
                     <a href="/invoiceEmail/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled"
                             class="px-2 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-700">Email</button></a>
                 </div>
                 @php
-                    }
-                @endphp
+                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                @endphp
 
 
                 <div x-data="{ buttonDisabled: false }">
 
                     <a href="/pdfNoSignature/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled"
-                            class="px-2 py-1 text-sm text-white bg-green-500 rounded hover:bg-red-700">PDF No Signature</button></a>
+                            class="px-2 py-1 text-sm text-white bg-green-500 rounded hover:bg-red-700">PDF No
+                            Signature</button></a>
                 </div>
                 <div x-data="{ buttonDisabled: false }">
 
@@ -134,7 +135,20 @@
                     @endphp
                     @foreach ($invoices as $i)
                         <tr>
-                            <td class="garis">{{ $i->package }}</td>
+                            @if (is_koma($i->package))
+                                <td class="garis">
+                                    @php
+                                                                                $data = explode(',', $i->package);
+                                                                                foreach($data as $d) {
+                                                                        @endphp
+                                    {{ $d }} <br>
+                                    @php
+                                                                                }
+                                                                        @endphp
+                                </td>
+                            @else
+                                <td class="garis">{{ $i->package }}</td>
+                            @endif
                             <td class="garis package">{{ $i->qty }} {{ $i->qty > 1 ? 'Packages' : 'Package' }}
                             </td>
                             <td class="garis rupiah">IDR {{ number_format($i->qty * $i->price) }}</td>

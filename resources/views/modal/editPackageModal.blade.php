@@ -4,7 +4,7 @@
         <hr class="px-3 my-2">
 
         <div class="p-3">
-            <x-input-label for="package" :value="__('Package')" />
+            <x-input-label for="package" :value="__('Package details separated by comma')" />
             <x-text-input id="package" class="block w-full mt-1" type="text" name="package" :value="old('package')" required
                 wire:model="package" autofocus autocomplete="package" />
             <x-input-error :messages="$errors->get('package')" class="mt-2" />
