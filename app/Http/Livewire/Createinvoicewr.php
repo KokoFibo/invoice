@@ -13,9 +13,10 @@ class Createinvoicewr extends Component
 {
     public $number,  $price,  $qty, $tax,  $invoice_date, $due_date, $status, $package_id, $invoice_id, $paket;
     public $invoices = [], $package, $contract, $contract_date, $customer, $customer_id;
-    public $lolos, $dataContract,$discount, $subtotal, $total, $test;
+    public $lolos, $dataContract, $discount, $subtotal, $total, $test;
 
-    public function updatePrice ($index) {
+    public function updatePrice($index)
+    {
         $data = Package::where('package', $this->invoices[$index]['package'])->first();
         if ($data != null) {
             $this->invoices[$index]['price'] = $data->price;
@@ -45,10 +46,11 @@ class Createinvoicewr extends Component
         ];
     }
 
-    public function updatedContract () {
+    public function updatedContract()
+    {
         $data = Contract::where('customer_id', $this->customer_id)->first();
         $this->contract_date = $data->contract_date;
-        if($this->contract != null) {
+        if ($this->contract != null) {
             if ($this->discount == null) {
                 $this->discount = 0;
             }
@@ -69,12 +71,12 @@ class Createinvoicewr extends Component
                 'discount' => $this->discount,
                 'status' => 'Draft',
             ];
-
         } else {
             $this->delete_row(0);
         }
     }
-    public function updatedCustomerId () {
+    public function updatedCustomerId()
+    {
         try {
             $this->contract = '';
             // $this->dataContract = Contract::where('customer_id', $this->customer_id)->first();
@@ -83,7 +85,7 @@ class Createinvoicewr extends Component
             $this->contract_date = $data->contract_date;
 
             $this->contract = $data->contract_number;
-            if($this->contract != null) {
+            if ($this->contract != null) {
                 $this->delete_row(0);
 
                 if ($this->discount == null) {
@@ -106,7 +108,6 @@ class Createinvoicewr extends Component
                     'discount' => $this->discount,
                     'status' => 'Draft',
                 ];
-
             } else {
                 $this->delete_row(0);
                 $this->contract = '';
@@ -136,52 +137,52 @@ class Createinvoicewr extends Component
         // $this->validate();
         //    if($this->invoices != null){
 
-        for($i = 0; $i < count($this->invoices); $i++){
-            if($this->invoices[$i]['package'] == "" || $this->invoices[$i]['price'] <= 0 ||  $this->invoices[$i]['qty'] <= 0) {
-                $this->lolos = 0; break;
+        for ($i = 0; $i < count($this->invoices); $i++) {
+            if ($this->invoices[$i]['package'] == "" || $this->invoices[$i]['price'] <= 0 ||  $this->invoices[$i]['qty'] <= 0) {
+                $this->lolos = 0;
+                break;
             } else {
                 $this->lolos = 1;
             }
         }
 
-        if ($this->lolos == 1 ) {
+        if ($this->lolos == 1) {
 
 
 
-        for ($i = 0; $i < count($this->invoices); $i++) {
-            $this->invoices[$i]['customer_id'] = $this->customer_id;
-            $this->invoices[$i]['contract'] = $this->contract;
-            $this->invoices[$i]['tax'] = $this->tax;
-            $this->invoices[$i]['discount'] = $this->discount;
-            $this->invoices[$i]['invoice_date'] = $this->invoice_date;
-            $this->invoices[$i]['due_date'] = $this->due_date;
+            for ($i = 0; $i < count($this->invoices); $i++) {
+                $this->invoices[$i]['customer_id'] = $this->customer_id;
+                $this->invoices[$i]['contract'] = $this->contract;
+                $this->invoices[$i]['tax'] = $this->tax;
+                $this->invoices[$i]['discount'] = $this->discount;
+                $this->invoices[$i]['invoice_date'] = $this->invoice_date;
+                $this->invoices[$i]['due_date'] = $this->due_date;
+            }
+
+            // dd($this->invoices[0]['customer_id']);
+            foreach ($this->invoices as $key => $value) {
+                $data = Invoice::create([
+                    'number' => $value['number'],
+                    'invoice_date' => $value['invoice_date'],
+                    'due_date' => $value['due_date'],
+                    'customer_id' => $value['customer_id'],
+                    'contract' => $value['contract'],
+                    'package' => $value['package'],
+                    'price' => $value['price'],
+                    'qty' => $value['qty'],
+                    'tax' => $value['tax'],
+                    'discount' => $value['discount'],
+                    'status' => $value['status'],
+                ]);
+            }
+            // }
+            $this->invoices = [];
+            $this->dispatchBrowserEvent('success', ['message' => 'Data Saved']);
+
+            return  redirect()->to('/invoice');
+        } else {
+            $this->dispatchBrowserEvent('error', ['message' => 'Data incomplete']);
         }
-
-        // dd($this->invoices[0]['customer_id']);
-        foreach ($this->invoices as $key => $value) {
-            $data = Invoice::create([
-                'number' => $value['number'],
-                'invoice_date' => $value['invoice_date'],
-                'due_date' => $value['due_date'],
-                'customer_id' => $value['customer_id'],
-                'contract' => $value['contract'],
-                'package' => $value['package'],
-                'price' => $value['price'],
-                'qty' => $value['qty'],
-                'tax' => $value['tax'],
-                'discount' => $value['discount'],
-                'status' => $value['status'],
-            ]);
-        }
-        // }
-        $this->invoices = [];
-        $this->dispatchBrowserEvent('success', ['message' => 'Data Saved']);
-
-        return  redirect()->to('/invoice');
-    } else {
-        $this->dispatchBrowserEvent('error', ['message' => 'Data incomplete']);
-
-    }
     }
 
     public function createInvoice()

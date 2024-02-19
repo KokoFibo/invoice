@@ -6,6 +6,12 @@ use App\Models\Contract;
 use App\Models\Customer;
 use App\Models\Quotation;
 
+
+function is_koma($package)
+{
+    $data = explode(',', $package);
+    return count($data);
+}
 // function getContractNumber($id) {
 //     try {
 //         $data = Contract::where('customer_id', $id)->first();
