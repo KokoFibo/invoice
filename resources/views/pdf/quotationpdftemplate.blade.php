@@ -96,18 +96,17 @@
                 @foreach ($quotations as $q)
                     <tr>
                         <td
-                            style="font-size: 14px;border: 1px solid #999; padding: 8px 20px; text-align:left; line-height: 1.6;">
-                            <b>{{ $q->package }}</b>
+                            style="font-size: 14px; border: 1px solid #999; padding: 8px 20px; text-align: left; line-height: 1.6;">
                             @php
-                                $desc = getDetail($q->description);
+                                $desc = explode(',', $q->description);
+                                $judul = array_shift($desc);
                             @endphp
-                            <ul>
 
-                                @php
-                                    $cols = 40;
-                                @endphp
+                            <b>{{ $q->package }} - {{ $judul }}</b>
+
+                            <ul style="margin-top: 6px; padding-left: 20px; list-style-type: disc;">
                                 @foreach ($desc as $d)
-                                    <em> {{ $d }}</em>
+                                    <li><em>{{ trim($d) }}</em></li>
                                 @endforeach
                             </ul>
                         </td>

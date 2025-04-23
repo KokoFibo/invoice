@@ -50,7 +50,7 @@ class Createquotationwr extends Component
 
     public function saveQuotation()
     {
-            for ($i = 0; $i < count($this->quotations); $i++) {
+        for ($i = 0; $i < count($this->quotations); $i++) {
             if ($this->quotations[$i]['package'] == '' || $this->quotations[$i]['price'] <= 0 || $this->quotations[$i]['description'] == '') {
                 $this->lolos = 0;
                 break;
