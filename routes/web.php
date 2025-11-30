@@ -6,6 +6,7 @@ use App\Http\Livewire\Invoicewr;
 use App\Http\Livewire\Packagewr;
 use App\Http\Livewire\Contractwr;
 use App\Http\Livewire\Customerwr;
+use App\Http\Livewire\EditPackage;
 use App\Http\Livewire\Quotationwr;
 use App\Http\Livewire\Addinvoicewr;
 use App\Http\Livewire\Addcontractwr;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Createinvoicewr;
 use App\Http\Livewire\Editquotationwr;
 use App\Http\Livewire\Updateinvoicewr;
+use App\Http\Controllers\PdfController;
 use App\Http\Livewire\Createcontractwr;
 use App\Http\Livewire\Updatecontractwr;
 use App\Http\Livewire\Createquotationwr;
@@ -23,6 +25,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Updatedetailinvoicewr;
 use App\Http\Livewire\Updatedetailcontractwr;
 use App\Http\Livewire\Updatedetailquotationwr;
+use App\Http\Controllers\AutogenerateController;
 use App\Http\Controllers\InvoiceEmailController;
 use App\Http\Controllers\QuotationEmailController;
 
@@ -63,6 +66,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/customer', Customerwr::class)->name('customer');
         Route::get('/package', Packagewr::class)->name('package');
+        Route::get('/editpackage/{param}', EditPackage::class)->name('editpackage');
+
         Route::get('/invoice', Invoicewr::class)->name('invoice');
         Route::get('/createinvoice', Createinvoicewr::class)->name('createinvoice');
         Route::get('/updateinvoice/{current_number}', Updateinvoicewr::class)->name('updateinvoice');
@@ -75,8 +80,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/addquotation/{number}', Addquotationwr::class)->name('addquotation');
 
         Route::get('/pdftemplate/{number}', [InvoiceEmailController::class, 'index']);
-        Route::get('/pdf/{number}', [InvoiceEmailController::class, 'pdf']);
-        Route::get('/pdfNoSignature/{number}', [InvoiceEmailController::class, 'pdfNoSignature']);
+        Route::get('/pdf/{number}/{signature}', [InvoiceEmailController::class, 'pdf']);
+        // Route::get('/pdfNoSignature/{number}', [InvoiceEmailController::class, 'pdfNoSignature']);
         Route::get('/emailinvoice/{number}', [InvoiceEmailController::class, 'emailinvoice']);
         Route::get('/invoiceEmail/{number}', [InvoiceEmailController::class, 'invoiceEmail']);
 
@@ -94,8 +99,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/emailhtml', [InvoiceEmailController::class, 'emailhtml']);
 
         Route::get('/invoicemail/{number}', function () {
-            Mail::send(new InvoiceMail());
+            // Mail::send(new InvoiceMail());
+            dd('ini barusan dari web route');
         });
+
+        Route::get('/show-pdf/{number}', [PdfController::class, 'index']);
+
+        Route::get('/auto-generate-invoice', [AutogenerateController::class, 'index']);
     });
 
     Route::get('/test', function () {

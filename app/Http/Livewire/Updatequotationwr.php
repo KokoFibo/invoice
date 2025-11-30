@@ -15,9 +15,11 @@ class Updatequotationwr extends Component
     public $customer_id, $quotation_date, $number, $quotation_number, $quotation_id, $packages;
     public $updateUpper, $current_id;
     public $package, $price;
+    public $tax, $qty;
     protected $listeners =  ['delete'];
 
-    public function deleteConfirmation ($id) {
+    public function deleteConfirmation($id)
+    {
         $this->dispatchBrowserEvent('delete_confirmation', [
             'title' => 'Are you sure',
             'text' => "to delete this data?",
@@ -26,8 +28,9 @@ class Updatequotationwr extends Component
         ]);
     }
 
-    public function delete ($id) {
-        if($id != null) {
+    public function delete($id)
+    {
+        if ($id != null) {
             $data = Quotation::find($id);
             $data->delete();
             $this->quotation = Quotation::where('number', $this->current_number)->get();
@@ -36,7 +39,8 @@ class Updatequotationwr extends Component
         }
     }
 
-    public function mount ($current_number) {
+    public function mount($current_number)
+    {
         Session::put('task_url', request()->fullUrl());
         $this->updateUpper = false;
         $this->current_number = $current_number;
@@ -44,33 +48,37 @@ class Updatequotationwr extends Component
         $this->packages = Package::all();
 
         $this->quotation = Quotation::where('number', $this->current_number)->get();
-        foreach($this->quotation as $i) {
+        foreach ($this->quotation as $i) {
             $this->customer_id = $i->customer_id;
             $this->quotation_date = $i->quotation_date;
             $this->status = $i->status;
-
+            $this->tax = $i->tax;
         }
         // $this->quotation = Quotation::all();
         $this->customer = Customer::all();
         $this->quotation_number = invNumberFormat($this->number, $this->quotation_date);
     }
 
-    public function updatedEditPackage () {
+    public function updatedEditPackage()
+    {
         $data = Package::where('package', $this->edit_package)->get();
         $this->edit_price = $data->price;
         $this->edit_description = $data->description;
     }
-    public function editUpper () {
+    public function editUpper()
+    {
         $this->updateUpper = true;
     }
 
-    public function updateUpper () {
+    public function updateUpper()
+    {
         $data_id = Quotation::where('number', $this->current_number)->select('id')->get();
-        if($data_id != null) {
-            foreach($data_id as $d) {
+        if ($data_id != null) {
+            foreach ($data_id as $d) {
                 $data = Quotation::find($d->id);
                 $data->customer_id = $this->customer_id;
                 $data->quotation_date = $this->quotation_date;
+                $data->tax = $this->tax;
                 $data->status = $this->status;
                 $data->save();
             }
@@ -79,22 +87,24 @@ class Updatequotationwr extends Component
         $this->updateUpper = false;
     }
 
-    public function back () {
+    public function back()
+    {
         return redirect()->to('/quotation');
     }
 
-    public function cancel () {
+    public function cancel()
+    {
         $this->updateUpper = false;
         $this->updateLower = false;
-
     }
 
-    public function editLower ($id) {
+    public function editLower($id)
+    {
         $this->quotation_id = $id;
-
     }
 
-    public function updateLower ($id) {
+    public function updateLower($id)
+    {
         $this->current_id = $id;
         $this->updateLower = false;
     }

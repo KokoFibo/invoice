@@ -163,6 +163,26 @@
                 });
             </script>
         @endpush
+
+        {{-- @push('script')
+            <script>
+                $(document).ready(function() {
+                    // toastr.options.timeOut = 5000;
+                    @if (Session::has('error'))
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Fail Sending Email!',
+                            footer: 'Unknown Email Address'
+                        })
+                        // toastr.error('{{ Session::get('error') }}');
+                    @elseif (Session::has('success'))
+                        toastr.options.timeOut = 5000;
+                        toastr.success('{{ Session::get('success') }}');
+                    @endif
+                });
+            </script>
+        @endpush --}}
     </div>
 
 </div>

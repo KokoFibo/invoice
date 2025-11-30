@@ -5,7 +5,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
     <title>Document</title>
+    <style>
+        body,
+        p {
+            font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif !important;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333333;
+        }
+    </style>
 </head>
 
 <body
@@ -28,7 +41,7 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        <img src="https://invoice.kokofibo.com/images/quotation-header.jpg"
+        <img src="https://invoice.kokofibo.com/images/digital-web-design.jpg"
             style="display: block; width: 100%; height: auto" />
         <div class="card-content" style="padding: 50px; text-align: left; ">
             <div>

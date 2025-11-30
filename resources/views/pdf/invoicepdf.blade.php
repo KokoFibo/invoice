@@ -11,8 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="{{ asset('style/invoice.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <style>
+        body {
+            font-family: 'Poppins',
+                'Segoe UI',
+                'Helvetica Neue',
+                Arial,
+                sans-serif !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,29 +47,34 @@
 
             </div>
             <div class="flex flex-row gap-2">
-                @php
-                                                                                                                                                                                                                                                                if(isEmailed($invoice->number) == false) {
-                                                                                                                                                                                                                @endphp
+
+
+
+                @if ($is_emailed)
+                    <div x-data="{ buttonDisabled: false }">
+                        <a href="/invoiceEmail/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
+                                x-bind:disabled="buttonDisabled"
+                                class="px-2 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-700">Resend
+                                Email</button></a>
+                    </div>
+                @else
+                    <div x-data="{ buttonDisabled: false }">
+                        <a href="/invoiceEmail/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
+                                x-bind:disabled="buttonDisabled"
+                                class="px-2 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-700">Send
+                                Email</button></a>
+                    </div>
+                @endif
                 <div x-data="{ buttonDisabled: false }">
-                    <a href="/invoiceEmail/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
-                            x-bind:disabled="buttonDisabled"
-                            class="px-2 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-700">Email</button></a>
-                </div>
-                @php
-                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                @endphp
 
-
-                <div x-data="{ buttonDisabled: false }">
-
-                    <a href="/pdfNoSignature/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
+                    <a href="/pdf/{{ $invoice->number }}/no-signature"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled"
                             class="px-2 py-1 text-sm text-white bg-green-500 rounded hover:bg-red-700">PDF No
                             Signature</button></a>
                 </div>
                 <div x-data="{ buttonDisabled: false }">
 
-                    <a href="/pdf/{{ $invoice->number }}"><button x-on:click="buttonDisabled = true"
+                    <a href="/pdf/{{ $invoice->number }}/signature"><button x-on:click="buttonDisabled = true"
                             x-bind:disabled="buttonDisabled"
                             class="px-2 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-700">PDF</button></a>
                 </div>
@@ -75,7 +92,8 @@
 
 
             <div class="logo">
-                <img src="{{ asset('images/kokofibo logo.png') }}" style="width:250px" alt="">
+                {{-- <img src="{{ asset('images/kokofibo logo.png') }}" style="width:250px" alt=""> --}}
+                <img style="width:250px" src="https://invoice.kokofibo.com/images/logo-kokofibo.jpg" alt="">
             </div>
         </div>
 
@@ -138,13 +156,13 @@
                             @if (is_koma($i->package))
                                 <td class="garis">
                                     @php
-                                                                                $data = explode(',', $i->package);
-                                                                                foreach($data as $d) {
-                                                                        @endphp
+                                                                                                                                                                                                                                                                                                                                                                                                                $data = explode(',', $i->package);
+                                                                                                                                                                                                                                                                                                                                                                                                                foreach($data as $d) {
+                                                                                                                                                                                                                                                                                                                                                                        @endphp
                                     {{ $d }} <br>
                                     @php
-                                                                                }
-                                                                        @endphp
+                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                        @endphp
                                 </td>
                             @else
                                 <td class="garis">{{ $i->package }}</td>

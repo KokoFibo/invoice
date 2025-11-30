@@ -86,21 +86,8 @@
                         <td class="px-6 py-4"> {{ $loop->iteration }}</td>
                         <td class="px-6 py-4"> {{ $d->package }}</td>
                         <td class="px-6 py-4 text-right"> {{ number_format($d->price) }}</td>
-                        <td class="px-6 py-4">
-                            @php
-                                $desc = getDetail($d->description);
-                            @endphp
-                            <ul>
+                        <td class="px-6 py-4 ql-editor">{!! $d->description !!}</td>
 
-                                @foreach ($desc as $de)
-                                    <li class="list-disc">
-                                        {{ $de }}
-                                    </li>
-                                @endforeach
-
-
-                            </ul>
-                        </td>
                     </tr>
                 @endforeach
             </tbody>

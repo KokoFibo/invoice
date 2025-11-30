@@ -8,6 +8,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Spatie\Browsershot\Browsershot;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
@@ -40,7 +41,7 @@ class InvoiceMail extends Mailable
         $invoice_number = invNumberFormat($this->number, $invoice->invoice_date);
         // $month = month($invoice->due_date);
         $month = getMonthName($invoice->due_date);
-        $subject = 'Invoice '.$invoice_number. ' for '.$customer->title. ' '.$customer->company;
+        $subject = 'Invoice ' . $invoice_number . ' for ' . $customer->title . ' ' . $customer->company;
 
         return new Envelope(
             subject: $subject,
@@ -75,9 +76,14 @@ class InvoiceMail extends Mailable
         return new Content(
             // view: 'pdf.invoiceEmailTemplate',
             view: 'pdf.invoiceEmailTemplate',
-            with: ['title' => $customer->salutation,  'custName' => $customer->name, 'invoice_number' => $invoice_number,
-             'company' => $customer->company, 'due_date' => tanggal($invoice->due_date), 'invoice_date' => tanggal($invoice->invoice_date),
-             'total' => $total
+            with: [
+                'title' => $customer->salutation,
+                'custName' => $customer->name,
+                'invoice_number' => $invoice_number,
+                'company' => $customer->company,
+                'due_date' => tanggal($invoice->due_date),
+                'invoice_date' => tanggal($invoice->invoice_date),
+                'total' => $total
             ],
         );
     }
@@ -93,38 +99,33 @@ class InvoiceMail extends Mailable
         $invoices = Invoice::where('number', $this->number)->get();
         $invoice = Invoice::where('number', $this->number)->first();
         $customer = Customer::find($invoice->customer_id);
-        $contract = Contract::where('contract_number', $invoice->contract)->first();
-        if( $contract != ''){
-            $contract_number = contractNumberFormat($contract->contract_number, $contract->contract_date);
-            // dd($contract_number);
-        } else {
-            $contract_number = '-';
-            // dd($contract_number);
-        }
+
         $pdfFileName = 'Kokofibo_Invoice_' . invNumberFormat($this->number, $invoice->invoice_date) . '.pdf';
-        $footer = '<table style="width: 100%">
-        <tr>
-            <td style="width: 33%; text-align:left ;  ">
-                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
-                www.kokofibo.com
-            </td>
-            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
-                    width="30px" style="width: 15px;"> 087 780 620 632</td>
-            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
-                    width="30px" style="width: 15px;"> hello@kokofibo.com</td>
-        </tr>
-    </table>';
-        $mpdf = new \Mpdf\Mpdf();
-        $mpdf->SetFooter($footer);
 
-        ob_get_clean();
+        $template =  view(
+            'pdf.newinvoicepdftemplate',
+            [
+                'invoices' => $invoices,
+                'invoice' => $invoice,
+                'customer' => $customer
+                // 'contract_number' => $contract_number
+            ]
+        )->render();
+        // $footerHtml = view('pdf.footer')->render();
 
-        $html = view('pdf.invoicepdftemplate', compact(['invoices', 'invoice', 'customer', 'contract_number']));
-        $mpdf->WriteHTML($html);
-        $pdf = $mpdf->Output('', 'S');
+        $pdf = Browsershot::html($template)
+            ->showBackground()
+            ->noSandbox()
+            // ->showBrowserHeaderAndFooter()
+            // ->footerHtml($footerHtml)
+            // ->format('A4')
+            ->pdf(); // hasil binary
+
+
+
         return [
-            Attachment::fromData(fn () => $pdf, $pdfFileName)
-            ->withMime('application/pdf'),
+            Attachment::fromData(fn() => $pdf, $pdfFileName)
+                ->withMime('application/pdf'),
         ];
     }
 }

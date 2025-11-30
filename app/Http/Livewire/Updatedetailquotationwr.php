@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class Updatedetailquotationwr extends Component
 {
-    public $package, $price, $description, $current_id, $packages, $number;
+    public $package, $price, $description, $current_id, $packages, $number, $qty;
 
     public function mount($current_id, $number)
     {
@@ -20,6 +20,7 @@ class Updatedetailquotationwr extends Component
             $data = Quotation::find($current_id);
             $this->package = $data->package;
             $this->price = $data->price;
+            $this->qty = $data->qty;
             $this->description = $data->description;
         }
     }
@@ -40,6 +41,8 @@ class Updatedetailquotationwr extends Component
         $data = Quotation::find($this->current_id);
         $data->package = $this->package;
         $data->price = $this->price;
+        $data->qty = $this->qty;
+
         $data->description = $this->description;
         $data->save();
 

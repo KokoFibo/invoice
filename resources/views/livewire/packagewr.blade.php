@@ -21,17 +21,23 @@
             <tbody>
                 @foreach ($data as $key => $d)
                     <tr class="border-b dark:bg-gray-800 dark:border-gray-700 even:bg-gray-200 hover:bg-blue-200">
-                        <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                        {{-- <td class="px-6 py-4">{{ $loop->iteration }}</td> --}}
+                        <td class="px-6 py-4">{{ $d->id }}</td>
                         <td class="px-6 py-4">{{ $d->package }}</td>
                         <td class="px-6 py-4">{{ number_format($d->price) }}</td>
-                        <td class="px-6 py-4">{{ $d->description }}</td>
-
+                        {{-- <td class="px-6 py-4">{{ $d->description }}</td> --}}
+                        <td class="px-6 py-4 ql-editor">{!! $d->description !!}</td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
 
-
+                                {{-- 
                                 <button @click="editPackage=true" wire:click="editPackage({{ $d->id }})"
-                                    class="px-3 py-2 text-white bg-teal-500 rounded-lg hover:bg-teal-700">Edit</button>
+                                    class="px-3 py-2 text-white bg-teal-500 rounded-lg hover:bg-teal-700">Edit</button> --}}
+
+                                <a href="{{ route('editpackage', $d->id) }}">
+                                    <button
+                                        class="px-3 py-2 text-white bg-teal-500 rounded-lg hover:bg-teal-700">Edit</button>
+                                </a>
                                 <button wire:click="deleteConfirmation({{ $d->id }})"
                                     class="px-3 py-2 text-white bg-red-500 rounded-lg hover:bg-red-700">Delete</button>
                             </div>
@@ -46,5 +52,24 @@
         </div>
     </div>
     @include('modal.addPackageModal')
-    @include('modal.editPackageModal')
+    {{-- @include('modal.editPackageModal') --}}
+    @push('script')
+        <script>
+            $(document).ready(function() {
+                // toastr.options.timeOut = 5000;
+                @if (Session::has('error'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Fail Sending Email!',
+                        footer: 'Unknown Email Address'
+                    })
+                    // toastr.error('{{ Session::get('error') }}');
+                @elseif (Session::has('success'))
+                    toastr.options.timeOut = 5000;
+                    toastr.success('{{ Session::get('success') }}');
+                @endif
+            });
+        </script>
+    @endpush
 </div>

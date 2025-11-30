@@ -12,7 +12,8 @@ class Addquotationwr extends Component
     public $discount, $status, $package, $price, $qty, $number;
     public $current_id, $packages;
 
-    public function mount ($number) {
+    public function mount($number)
+    {
         $this->number = $number;
         $this->packages = Package::all();
         $data = Quotation::where('number', $this->number)->first();
@@ -20,11 +21,13 @@ class Addquotationwr extends Component
         $this->customer_id = $data->customer_id;
         $this->status = $data->status;
         $this->package = '';
-        $this->price = 0;
+        $this->price = $data->price;
+        $this->qty = $data->qty;
         $this->description = '';
     }
 
-    public function storeLower () {
+    public function storeLower()
+    {
         $data = new Quotation();
 
         $data->number = $this->number;
@@ -37,24 +40,36 @@ class Addquotationwr extends Component
         $data->save();
         $this->dispatchBrowserEvent('success', ['message' => 'Data Saved']);
 
-        $url = 'updatequotation/'.$this->number;
+        $url = 'updatequotation/' . $this->number;
         return redirect()->to($url);
     }
 
-    public function getPrice () {
-        if($this->package != null) {
+    public function updatedPackage()
+    {
+        try {
             $data = Package::where('package', $this->package)->first();
             $this->price = $data->price;
             $this->description = $data->description;
-        } else {
-            $this->price = 0;
-            $this->description = '';
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 
-    public function cancel () {
+    // public function getPrice () {
+    //     if($this->package != null) {
+    //         $data = Package::where('package', $this->package)->first();
+    //         $this->price = $data->price;
+    //         $this->description = $data->description;
+    //     } else {
+    //         $this->price = 0;
+    //         $this->description = '';
+    //     }
+    // }
 
-        $url = 'updatequotation/'.$this->number;
+    public function cancel()
+    {
+
+        $url = 'updatequotation/' . $this->number;
         return redirect()->to($url);
     }
 

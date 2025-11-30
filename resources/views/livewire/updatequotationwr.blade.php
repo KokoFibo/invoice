@@ -1,4 +1,5 @@
 <div class="p-3">
+    <p>tax {{ $tax }}</p>
     <div class="w-full mx-auto mt-3 text-black bg-white shadow lg:w-3/4 rounded-xl border-1">
         <h2 class="py-3 text-2xl font-semibold text-center">Update Quotation</h2>
     </div>
@@ -46,6 +47,21 @@
                     </select>
                 </div>
 
+                <div class="flex w-full">
+                    <span
+                        class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        Tax
+                    </span>
+                    <select wire:model="tax" {{ $updateUpper ? '' : 'disabled' }}
+                        class="rounded-none rounded-r-lg w-full  bg-gray-50 border  border-gray-300 text-gray-600
+        text-sm focus:ring-blue-500 focus:border-blue-500 lg:block p-2.5 dark:bg-gray-700 dark:border-gray-600
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        {{-- <option value="">Select Tax</option> --}}
+                        <option value=0>0</option>
+                        <option value=2.5>2.5</option>
+                        <option value=11>11</option>
+                    </select>
+                </div>
             </div>
 
 
@@ -107,10 +123,12 @@
                     <th class="w-10 px-6 py-3 ">#</th>
                     <th class="px-6 py-3 w-80 ">Package</th>
                     <th class="px-6 py-3 w-60 ">Price</th>
+                    <th class="px-6 py-3 w-60 ">Quantity</th>
                     <th class="px-6 py-3 w-96 ">Description</th>
                     <th class="w-40 px-6 py-3 ">
                         <a href="/addquotation/{{ $number }}"><button class="button button-blue">Add</button></a>
                     </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -122,8 +140,11 @@
                         <td class="px-6 py-4 ">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4">{{ $i->package }}</td>
                         <td class="px-6 py-4">{{ number_format($i->price) }}</td>
-                        <td class="px-6 py-4">{{ $i->description }}</td>
+                        <td class="px-6 py-4">{{ number_format($i->qty) }}</td>
+                        <td>
+                        <td class="px-6 py-4 ql-editor">{!! $i->description !!}</td>
 
+                        </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
                                 <a href="/updatedetailquotation/{{ $i->id }}/{{ $i->number }}"><button

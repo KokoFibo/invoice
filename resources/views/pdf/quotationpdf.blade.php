@@ -7,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <!-- Quill Editor -->
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <title>Quotation</title>
 </head>
@@ -50,23 +59,21 @@
                         <p class="text-3xl font-semibold">Created on</p>
                     </div>
                     <div class="flex gap-2">
-                        {{-- <div x-data="{ buttonDisabled: false }">
-                        <a href="/quotationEmail/{{ $quotation->number }}"><button x-on:click="buttonDisabled = true"
-                            x-bind:disabled="buttonDisabled" class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
-                    </div> --}}
-                        @php
-                                                                                                                                                            if(isEmailedQuotation($quotation->number) == false) {
-                                                                                                                                        @endphp
-                        <div x-data="{ buttonDisabled: false }">
-                            <a href="/quotationEmail/{{ $quotation->number }}"><button
-                                    x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled"
-                                    class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Email</button></a>
-                        </div>
-                        @php
-                                                                                                                                                                }
-                                                                                                                                        @endphp
-
-
+                        @if ($is_email_sent)
+                            <div x-data="{ buttonDisabled: false }">
+                                <a href="/quotationEmail/{{ $quotation->number }}"><button
+                                        x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled"
+                                        class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Resend
+                                        Email</button></a>
+                            </div>
+                        @else
+                            <div x-data="{ buttonDisabled: false }">
+                                <a href="/quotationEmail/{{ $quotation->number }}"><button
+                                        x-on:click="buttonDisabled = true" x-bind:disabled="buttonDisabled"
+                                        class="px-2 py-1 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-700">Send
+                                        Email</button></a>
+                            </div>
+                        @endif
 
 
 
@@ -121,7 +128,8 @@
                                 class="text-xl border-b dark:bg-gray-800 dark:border-gray-700 even:bg-gray-200 hover:bg-blue-200">
                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $d->package }}</td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 ql-editor">{!! $d->description !!}</td>
+                                {{-- <td class="px-6 py-4">
                                     @php
                                         $desc = explode(',', $d->description);
                                         $judul = array_shift($desc); // Ambil elemen pertama sebagai judul
@@ -133,7 +141,7 @@
                                             <li>{{ trim($de) }}</li>
                                         @endforeach
                                     </ul>
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-4">1 Package</td>
                                 <td class="px-6 py-4">IDR {{ number_format($d->price) }}</td>
 
@@ -150,7 +158,18 @@
 
         </div>
     </div>
+    <style>
+        /* Styling untuk list di Quill agar muncul di Tailwind */
+        .ql-editor ol {
+            list-style-type: decimal !important;
+            /* margin-left: 1.5rem !important; */
+        }
 
+        .ql-editor ul {
+            list-style-type: disc !important;
+            /* margin-left: 1.5rem !important; */
+        }
+    </style>
 
 </body>
 

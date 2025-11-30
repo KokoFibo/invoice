@@ -1,4 +1,5 @@
 <div class="p-3">
+    <p>tax: {{ $tax }}</p>
     <div class="w-full mt-3 text-black bg-white shadow lg:mx-auto lg:px-0 lg:w-3/4 rounded-xl border-1">
         <h2 class="py-3 text-2xl font-semibold text-center">Create Quotation</h2>
     </div>
@@ -22,6 +23,24 @@
                             <option value="{{ $c->id }}">{{ $c->company }}</option>
                         @endforeach
                     </select>
+
+                </div>
+                <div class="flex ">
+                    <span
+                        class="inline-flex items-center w-32 px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                        Tax
+                    </span>
+                    <select wire:model.live="tax"
+                        class=" w-full lg:w-72  bg-gray-50 border  border-gray-300 text-gray-600 rounded-none rounded-r-lg
+        text-sm focus:ring-blue-500 focus:border-blue-500 lg:block p-2.5 dark:bg-gray-700 dark:border-gray-600
+        dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Tax</option>
+
+                        <option value="0">0</option>
+                        <option value="2.5">2.5</option>
+                        <option value="11">11</option>
+                    </select>
+
                 </div>
             </div>
 
@@ -53,10 +72,11 @@
 
             <table class="w-full mt-3 text-sm text-left text-gray-500 table-fixed lg:table-auto dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr class="text-white bg-gray-500 dark:text-white">
+                    <tr class="text-white bg-gray-500 dark:text-white text-center">
                         <th class="w-10 px-6 py-3 ">#</th>
                         <th class="px-6 py-3 w-80 ">Package</th>
                         <th class="px-6 py-3 w-60 ">Price</th>
+                        <th class="px-6 py-3 w-60 ">Quantity</th>
                         <th class="px-6 py-3 w-96 ">Description</th>
                         <th class="w-20 px-6 py-3 ">
                             @if ($customer_id == '')
@@ -70,14 +90,14 @@
                 <tbody>
                     @if (!empty($quotations))
                         @foreach ($quotations as $index => $quotation)
-                            <tr x-data="{ packageManual: false }" @dblclick="packageManual = !packageManual"
+                            <tr
                                 class="border-b dark:bg-gray-800 dark:border-gray-700 even:bg-gray-200 hover:bg-blue-200">
                                 <td class="px-6 py-4 ">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4 ">
 
 
 
-                                    <div x-show="!packageManual">
+                                    <div class="text-center">
                                         <select wire:model="quotations.{{ $index }}.package"
                                             wire:change="updatePrice({{ $index }})"
                                             class=" bg-gray-50 w-full border rounded-lg border-gray-300 text-gray-600
@@ -90,30 +110,40 @@
                                         </select>
                                     </div>
 
-                                    {{-- input package manual --}}
-                                    <div x-show="packageManual">
+                                    {{-- <div x-show="packageManual">
                                         <x-text-input class="w-full mt-1 " type="text" name="package"
                                             :value="old('package')" required
                                             wire:model.lazy="quotations.{{ $index }}.package"
                                             autocomplete="package" />
-                                    </div>
+                                    </div> --}}
 
                                 </td>
                                 <td class="px-6 py-4 ">
                                     {{-- input price --}}
-                                    <div>
-                                        <x-text-input class="block w-full mt-1 text-right " type="text"
+                                    <div class="block w-full mt-1 text-center">
+                                        {{ number_format($quotations[$index]['price']) }}
+
+                                        {{-- <x-text-input class="block w-full mt-1 text-right " type="text"
                                             name="price" :value="old('price')"
                                             wire:model.lazy="quotations.{{ $index }}.price"
-                                            autocomplete="price" />
+                                            autocomplete="price" /> --}}
                                     </div>
+
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    {{-- input description --}}
+                                    {{-- input Qty --}}
                                     <div>
-
-                                        <textarea rows="4" wire:model.lazy="quotations.{{ $index }}.description"
-                                            class="w-full block p-2.5  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                                        <x-text-input class="block w-full mt-1 text-center " type="text"
+                                            name="qty" :value="old('qty')"
+                                            wire:model.lazy="quotations.{{ $index }}.qty" autocomplete="qty" />
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-center ">
+                                    {{-- input description --}}
+                                    <div class="ql-editor">
+                                        {!! $quotations[$index]['description'] !!}
+                                        {{-- <textarea rows="4" wire:model.lazy="quotations.{{ $index }}.description"
+                                            class="w-full block p-2.5  text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea> --}}
 
                                     </div>
                                 </td>

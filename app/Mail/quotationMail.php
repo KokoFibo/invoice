@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Quotation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Spatie\Browsershot\Browsershot;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
@@ -38,7 +39,8 @@ class quotationMail extends Mailable
         $quotation_number = quoNumberFormat($this->number, $quotation->quotation_date);
         // $month = month($invoice->due_date);
         $month = getMonthName($quotation->due_date);
-        $subject = 'Quotation '.$quotation_number. ' for '.$customer->title. ' '.$customer->company;;
+        $subject = 'Quotation ' . $quotation_number . ' for ' . $customer->title . ' ' . $customer->company;
+
         return new Envelope(
             subject: $subject,
             // cc: 'tiffany.blueskycreation@gmail.com',
@@ -58,8 +60,11 @@ class quotationMail extends Mailable
         $quotation_number = quoNumberFormat($this->number, $quotation->quotation_date);
         return new Content(
             view: 'pdf.quotationEmailTemplate',
-            with: ['title' => $customer->salutation,  'custName' => $customer->name, 'quotation_number' => $quotation_number,
-            'company' => $customer->company,
+            with: [
+                'title' => $customer->salutation,
+                'custName' => $customer->name,
+                'quotation_number' => $quotation_number,
+                'company' => $customer->company,
             ],
         );
     }
@@ -75,29 +80,25 @@ class quotationMail extends Mailable
         $quotation = Quotation::where('number', $this->number)->first();
         $customer = Customer::find($quotation->customer_id);
         $pdfFileName = 'Kokofibo_' . quoNumberFormat($this->number, $quotation->quotation_date) . '.pdf';
-        $footer = '<table style="width: 100%">
-        <tr>
-            <td style="width: 33%; text-align:left ;  ">
-                <img src="https://invoice.kokofibo.com/images/web.png" width="30px" style="width: 15px;">
-                www.kokofibo.com
-            </td>
-            <td style="width: 33%; text-align:center"><img src="https://invoice.kokofibo.com/images/whatsapp.png"
-                    width="30px" style="width: 15px;"> 0877 2658 8836</td>
-            <td style="width: 33%; text-align:right"><img src="https://invoice.kokofibo.com/images/email.png"
-                    width="30px" style="width: 15px;"> hello@kokofibo.com</td>
-        </tr>
-    </table>';
-        $mpdf = new \Mpdf\Mpdf();
-        $mpdf->SetFooter($footer);
+        // ✅ Generate HTML untuk isi PDF
+        $template = view('pdf.newquotationpdftemplate', compact('quotations', 'quotation', 'customer'))->render();
 
-        ob_get_clean();
+        // ✅ Tambahkan footer HTML
+        // $footerHtml = view('pdf.footer')->render();
 
-        $html = view('pdf.quotationpdftemplate', compact(['quotations', 'quotation', 'customer']));
-        $mpdf->WriteHTML($html);
-        $pdf = $mpdf->Output('', 'S');
+        // ✅ Render ke PDF pakai Browsershot (binary)
+        $pdf = Browsershot::html($template)
+            ->showBackground()
+            ->noSandbox()
+            // ->showBrowserHeaderAndFooter()
+            // ->footerHtml($footerHtml)
+            ->format('A4')
+            ->pdf(); // hasil binary
+
+        // ✅ Return attachment langsung dari binary
         return [
-            Attachment::fromData(fn () => $pdf, $pdfFileName)
-            ->withMime('application/pdf'),
+            Attachment::fromData(fn() => $pdf, $pdfFileName)
+                ->withMime('application/pdf'),
         ];
     }
 }
