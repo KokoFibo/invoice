@@ -1,7 +1,7 @@
 <div class="p-3">
     <p>tax {{ $tax }}</p>
     <div class="w-full mx-auto mt-3 text-black bg-white shadow lg:w-3/4 rounded-xl border-1">
-        <h2 class="py-3 text-2xl font-semibold text-center">Update Quotation2</h2>
+        <h2 class="py-3 text-2xl font-semibold text-center">Update Quotation</h2>
     </div>
     @if (Session::has('message'))
         <script>
