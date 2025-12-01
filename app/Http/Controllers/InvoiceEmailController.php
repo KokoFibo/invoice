@@ -87,13 +87,14 @@ class InvoiceEmailController extends Controller
         }
 
         $pdf = Browsershot::html($template)
+            ->setOption('args', ['--disable-web-security'])
             ->showBackground()
             ->noSandbox()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
             ->format('A4')
             ->pdf(); // hasil binary
-
+        // dd($pdf);
         // return back()->with('message', 'PDF Generated');
 
         // Kirim langsung ke browser untuk di-download
