@@ -88,27 +88,32 @@ class InvoiceEmailController extends Controller
 
         $pdf = Browsershot::html($template)
             // ini utk di PC
-            // ->setOption('args', ['--disable-web-security'])
+            ->setOption('args', ['--disable-web-security'])
+            ->showBackground()
+            ->noSandbox()
+
+
             // ini untuk di vps
 
-            ->setChromePath('/usr/bin/google-chrome')
-            ->addChromiumArguments([
-                '--no-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-setuid-sandbox',
-                '--disable-gpu',
-            ])
-            ->setOption('userDataDir', '/tmp/chrome-user-data')
-            ->setOption('env', [
-                'HOME' => '/tmp',
-                'XDG_CONFIG_HOME' => '/tmp/.config',
-                'XDG_DATA_HOME' => '/tmp/.local/share'
-            ])
+            // ->setChromePath('/usr/bin/google-chrome')
+            // ->addChromiumArguments([
+            //     '--no-sandbox',
+            //     '--disable-dev-shm-usage',
+            //     '--disable-setuid-sandbox',
+            //     '--disable-gpu',
+            // ])
+            // ->setOption('userDataDir', '/tmp/chrome-user-data')
+            // ->setOption('env', [
+            //     'HOME' => '/tmp',
+            //     'XDG_CONFIG_HOME' => '/tmp/.config',
+            //     'XDG_DATA_HOME' => '/tmp/.local/share'
+            // ])
 
             // batas sampai sini
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
+            ->emulateMedia('screen') // Agar variabel CSS :root terbaca
             ->format('A4')
             ->pdf(); // hasil binary
 
