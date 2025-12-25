@@ -141,6 +141,7 @@ class InvoiceEmailController extends Controller
             // dd('ada kesalahan email');
             //  return $e->getMessage();
             // return redirect(route('invoice'))->with('error', 'Fail Sending Email');
+            dd($e->getMessage());
             return redirect(route('invoice'))->with('error', $e->getMessage());
         }
     }
