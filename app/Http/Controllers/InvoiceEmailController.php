@@ -87,11 +87,10 @@ class InvoiceEmailController extends Controller
         }
 
         $pdf = Browsershot::html($template)
-            ->setChromePath('/snap/bin/chromium')   // PENTING
+            ->setChromePath('/usr/bin/google-chrome')  // pakai Chrome non-snap
             ->addChromiumArguments([
-                '--no-sandbox',          // wajib di VPS
-                '--disable-dev-shm-usage',
-                '--disable-web-security' // opsional kalau perlu
+                '--no-sandbox',           // wajib di VPS
+                '--disable-dev-shm-usage' // aman untuk RAM kecil
             ])
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
