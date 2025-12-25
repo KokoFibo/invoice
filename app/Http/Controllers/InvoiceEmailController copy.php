@@ -93,7 +93,7 @@ class InvoiceEmailController extends Controller
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
             ->format('A4')
-            ->pdf(); // hasil binary
+            ->pdf();
 
 
         // Kirim langsung ke browser untuk di-download

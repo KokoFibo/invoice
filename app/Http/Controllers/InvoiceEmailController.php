@@ -87,20 +87,25 @@ class InvoiceEmailController extends Controller
         }
 
         $pdf = Browsershot::html($template)
+            // ini utk di PC
+            // ->setOption('args', ['--disable-web-security'])
+            // ini untuk di vps
+
             ->setChromePath('/usr/bin/google-chrome')
             ->addChromiumArguments([
                 '--no-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-setuid-sandbox',
-                '--disable-gpu', // Menambah stabilitas di Linux
+                '--disable-gpu',
             ])
-            // PENTING: Gunakan metode ini untuk memastikan Chrome tidak menyentuh /var/www
             ->setOption('userDataDir', '/tmp/chrome-user-data')
             ->setOption('env', [
                 'HOME' => '/tmp',
                 'XDG_CONFIG_HOME' => '/tmp/.config',
                 'XDG_DATA_HOME' => '/tmp/.local/share'
             ])
+
+            // batas sampai sini
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
@@ -135,7 +140,8 @@ class InvoiceEmailController extends Controller
         } catch (\Exception $e) {
             // dd('ada kesalahan email');
             //  return $e->getMessage();
-            return redirect(route('invoice'))->with('error', 'Fail Sending Email');
+            // return redirect(route('invoice'))->with('error', 'Fail Sending Email');
+            return redirect(route('invoice'))->with('error', $e->getMessage());
         }
     }
 }
