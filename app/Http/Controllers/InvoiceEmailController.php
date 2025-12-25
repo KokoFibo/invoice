@@ -88,9 +88,9 @@ class InvoiceEmailController extends Controller
 
         $pdf = Browsershot::html($template)
             // ini utk di PC
-            ->setOption('args', ['--disable-web-security'])
-            ->showBackground()
-            ->noSandbox()
+            // ->setOption('args', ['--disable-web-security'])
+            // ->showBackground()
+            // ->noSandbox()
             // ok dah
 
             // ini untuk di vps
@@ -108,6 +108,18 @@ class InvoiceEmailController extends Controller
             //     'XDG_CONFIG_HOME' => '/tmp/.config',
             //     'XDG_DATA_HOME' => '/tmp/.local/share'
             // ])
+
+            // ini untuk yang baru
+            ->addChromiumArguments([
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-setuid-sandbox',
+            ])
+            // PENTING: Paksa Home ke /tmp agar tidak bentrok dengan permission /var/www/.local
+            ->setEnvVars([
+                'HOME' => '/tmp',
+                'PUPPETEER_CACHE_DIR' => base_path('.cache/puppeteer'),
+            ])
 
             // batas sampai sini
             ->showBackground()
