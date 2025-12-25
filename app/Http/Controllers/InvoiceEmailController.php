@@ -88,26 +88,22 @@ class InvoiceEmailController extends Controller
 
         $pdf = Browsershot::html($template)
             // ini utk di PC
-            ->setOption('args', ['--disable-web-security'])
-            ->showBackground()
-            ->noSandbox()
+            // ->setOption('args', ['--disable-web-security'])
+            // ->showBackground()
+            // ->noSandbox()
             // ok dah
 
             // ini untuk di vps
-
-            // ->setChromePath('/usr/bin/google-chrome')
-            // ->addChromiumArguments([
-            //     '--no-sandbox',
-            //     '--disable-dev-shm-usage',
-            //     '--disable-setuid-sandbox',
-            //     '--disable-gpu',
-            // ])
-            // ->setOption('userDataDir', '/tmp/chrome-user-data')
-            // ->setOption('env', [
-            //     'HOME' => '/tmp',
-            //     'XDG_CONFIG_HOME' => '/tmp/.config',
-            //     'XDG_DATA_HOME' => '/tmp/.local/share'
-            // ])
+            ->addChromiumArguments([
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-setuid-sandbox',
+            ])
+            // PENTING: Paksa Home ke /tmp agar tidak bentrok dengan permission /var/www/.local
+            ->setEnvVars([
+                'HOME' => '/tmp',
+                'PUPPETEER_CACHE_DIR' => base_path('.cache/puppeteer'),
+            ])
 
             // batas sampai sini
             ->showBackground()
