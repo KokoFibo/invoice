@@ -34,7 +34,7 @@
       ">
         {{-- <img src="https://invoice.kokofibo.com/images/invoice-header.jpg"
             style="display: block; width: 100%; height: auto" /> --}}
-        <img src="https://invoice.kokofibo.com/images/happy-new-year.jpg"
+        <img src="https://invoice.kokofibo.com/images/happy-new-year.webp"
             style="display: block; width: 100%; height: auto" />
         {{-- <img src="https://invoice.kokofibo.com/images/digital-web-design.jpg"
             style="display: block; width: 100%; height: auto" /> --}}
