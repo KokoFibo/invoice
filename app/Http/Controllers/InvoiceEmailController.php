@@ -94,22 +94,6 @@ class InvoiceEmailController extends Controller
             // ok dah
 
             // ini untuk di vps
-
-            // ->setChromePath('/usr/bin/google-chrome')
-            // ->addChromiumArguments([
-            //     '--no-sandbox',
-            //     '--disable-dev-shm-usage',
-            //     '--disable-setuid-sandbox',
-            //     '--disable-gpu',
-            // ])
-            // ->setOption('userDataDir', '/tmp/chrome-user-data')
-            // ->setOption('env', [
-            //     'HOME' => '/tmp',
-            //     'XDG_CONFIG_HOME' => '/tmp/.config',
-            //     'XDG_DATA_HOME' => '/tmp/.local/share'
-            // ])
-
-            // ini untuk yang baru
             ->addChromiumArguments([
                 '--no-sandbox',
                 '--disable-dev-shm-usage',

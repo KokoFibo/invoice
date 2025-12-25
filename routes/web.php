@@ -19,6 +19,7 @@ use App\Http\Livewire\Updateinvoicewr;
 use App\Http\Controllers\PdfController;
 use App\Http\Livewire\Createcontractwr;
 use App\Http\Livewire\Updatecontractwr;
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\Createquotationwr;
 use App\Http\Livewire\Updatequotationwr;
 use App\Http\Controllers\ProfileController;
@@ -108,9 +109,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/auto-generate-invoice', [AutogenerateController::class, 'index']);
     });
 
-    Route::get('/test', function () {
-        return view('test');
-    });
+    Route::get('/test', [TestController::class, 'test']);
 });
 
 require __DIR__ . '/auth.php';
