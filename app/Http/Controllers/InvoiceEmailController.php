@@ -93,6 +93,9 @@ class InvoiceEmailController extends Controller
                 '--disable-dev-shm-usage' // aman untuk RAM kecil
             ])
             ->setOption('userDataDir', '/tmp/chrome-user-data') // wajib
+            ->setOption('env', [
+                'HOME' => '/tmp'
+            ])
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
