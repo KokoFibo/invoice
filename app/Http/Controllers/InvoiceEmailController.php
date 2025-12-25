@@ -87,13 +87,20 @@ class InvoiceEmailController extends Controller
         }
 
         $pdf = Browsershot::html($template)
-            ->setChromePath('/usr/bin/google-chrome')  // pakai Chrome non-snap
+            ->setChromePath('/usr/bin/google-chrome')
             ->addChromiumArguments([
-                '--no-sandbox',           // wajib di VPS
-                '--disable-dev-shm-usage' // aman untuk RAM kecil
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-setuid-sandbox',
+                '--disable-gpu', // Menambah stabilitas di Linux
             ])
-            ->setOption('userDataDir', '/tmp/chrome-user-data') // wajib
-            ->setEnvVars(['HOME' => '/tmp']) // Memaksa Chrome menggunakan /tmp sebagai Home
+            // PENTING: Gunakan metode ini untuk memastikan Chrome tidak menyentuh /var/www
+            ->setOption('userDataDir', '/tmp/chrome-user-data')
+            ->setOption('env', [
+                'HOME' => '/tmp',
+                'XDG_CONFIG_HOME' => '/tmp/.config',
+                'XDG_DATA_HOME' => '/tmp/.local/share'
+            ])
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
