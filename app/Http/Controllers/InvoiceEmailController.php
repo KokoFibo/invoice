@@ -92,6 +92,7 @@ class InvoiceEmailController extends Controller
                 '--no-sandbox',           // wajib di VPS
                 '--disable-dev-shm-usage' // aman untuk RAM kecil
             ])
+            ->setOption('userDataDir', '/tmp/chrome-user-data') // wajib
             ->showBackground()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
