@@ -32,10 +32,10 @@
         overflow: hidden;
         margin: 0 auto;
       ">
-        {{-- <img src="https://invoice.kokofibo.com/images/invoice-header.jpg"
-            style="display: block; width: 100%; height: auto" /> --}}
-        <img src="https://invoice.kokofibo.com/images/happy-new-year.webp"
+        <img src="https://invoice.kokofibo.com/images/invoice-header.jpg"
             style="display: block; width: 100%; height: auto" />
+        {{-- <img src="https://invoice.kokofibo.com/images/happy-new-year.webp"
+            style="display: block; width: 100%; height: auto" /> --}}
         {{-- <img src="https://invoice.kokofibo.com/images/digital-web-design.jpg"
             style="display: block; width: 100%; height: auto" /> --}}
         <div class="card-content" style="padding: 50px; text-align: left; ">
