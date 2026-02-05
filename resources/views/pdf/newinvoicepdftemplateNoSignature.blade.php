@@ -13,7 +13,8 @@
         <header class="flex flex-col sm:flex-row justify-between items-start gap-5 mb-6">
             <div class="flex items-center gap-4">
                 <div>
-                    <img class="w-24" src="https://invoice.kokofibo.com/images/logo-kokofibo.jpg" alt="">
+                    <img class="w-24" src="https://invoice.kokofibo.com/images/images/kokofibo logo1.png"
+                        alt="">
                 </div>
                 <div>
                     <h1 class="text-lg font-semibold tracking-tight">Kokofibo Web Developer</h1>
@@ -45,9 +46,9 @@
             <div class="flex-1 min-w-[220px] bg-slate-100 p-4 rounded-lg">
                 <h3 class="text-xs font-semibold text-slate-900 mb-2">Payment Information</h3>
                 <p class="text-sm text-slate-700 leading-relaxed">
-                    Bank: Permata Bank<br />
+                    Bank: OCBC<br />
                     Account Name: Phang Esti Anton<br />
-                    Account No.: 4000685688
+                    Account No.: 634810187381
                 </p>
             </div>
         </div>

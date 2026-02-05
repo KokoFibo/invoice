@@ -180,7 +180,7 @@
             <td style="vertical-align: top;">{{ $customer->address }}</td>
             <td> </td>
             <td>
-                <p>Bank Permata<br>4000 68 56 88</p>
+                <p>Bank OCBC<br>634810187381</p>
             </td>
         </tr>
         <tr>
@@ -211,13 +211,13 @@
                         @if (is_koma($i->package))
                             <td style="padding: 15 15px 0 15px" class="garis">
                                 @php
-                                                                                                                    $data = explode(',', $i->package);
-                                                                                                                    foreach($data as $d) {
-                                                                                                        @endphp
+                                                                                                                                                                                            $data = explode(',', $i->package);
+                                                                                                                                                                                            foreach($data as $d) {
+                                                                                                                                                                        @endphp
                                 {{ $d }} <br>
                                 @php
-                                                                                                                    }
-                                                                                                        @endphp
+                                                                                                                                                                                            }
+                                                                                                                                                                        @endphp
                             </td>
                         @else
                             <td style="padding: 15 15px 0 15px" class="garis">{{ $i->package }}</td>
