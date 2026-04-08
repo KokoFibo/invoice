@@ -19,7 +19,7 @@ class AutogenerateController extends Controller
 
         try {
             $numbers = Invoice::orderBy('number', 'desc')
-                ->limit(3)
+                ->limit(4)
                 ->pluck('number');
 
             foreach ($numbers as $number) {
@@ -54,6 +54,12 @@ class AutogenerateController extends Controller
         // 6 ysm "Yifang Payroll (OS) Monthly Maintenance Services (Oktober 2025)"
 
         $lastMonth = Carbon::now()->subMonth()->translatedFormat('F Y');
+
+        // BAI
+        $data = Package::find(28);
+        $data->package = "BAI Payroll Monthly Maintenance Services (" . $lastMonth . ")";
+        $bai_package = $data->package;
+        $data->save();
 
         // STI
         $data = Package::find(27);
@@ -129,6 +135,22 @@ class AutogenerateController extends Controller
             'customer_id' => 4,
             'contract' => '',
             'package' => $sti_package,
+            'price' => 2000000,
+            'qty' => 1,
+            'tax' => 0,
+            'discount' => 0,
+            'status' => 'Draft',
+        ]);
+
+        // BAI
+        $maxNumber = Invoice::max('number');
+        $invoice = Invoice::create([
+            'number' => $maxNumber + 1,
+            'invoice_date' => now(),
+            'due_date' => now()->addDays(7),
+            'customer_id' => 4,
+            'contract' => '',
+            'package' => $bai_package,
             'price' => 2000000,
             'qty' => 1,
             'tax' => 0,
