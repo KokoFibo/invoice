@@ -20,7 +20,7 @@ jobs:
             cd /var/www/invoice
 
             git fetch origin
-git reset --hard origin/ok1
+            git reset --hard origin/ok1
 
             php artisan optimize:clear
             php artisan optimize
