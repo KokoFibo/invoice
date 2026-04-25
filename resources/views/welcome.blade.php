@@ -863,7 +863,7 @@
         @endif
 
         <div class="text-2xl text-center lg:text-5xl ">
-            Kokofibo Invoicing System v 1.1
+            Kokofibo Invoicing System v 1.2
         </div>
     </div>
 </body>

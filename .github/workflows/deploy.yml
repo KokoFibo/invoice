@@ -1,4 +1,4 @@
-name: íº€ Deploy INVOICE
+name: Deploy INVOICE
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: íº€ Deploy ke VPS
+      - name: Deploy ke VPS
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VPS_HOST }}
