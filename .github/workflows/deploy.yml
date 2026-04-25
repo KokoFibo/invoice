@@ -3,7 +3,8 @@ name: Deploy INVOICE
 on:
   push:
     branches:
-      - ok1   # atau ganti ke main nanti
+      - "**"
+#      - ok1   # atau ganti ke main nanti
 
 jobs:
   deploy:
