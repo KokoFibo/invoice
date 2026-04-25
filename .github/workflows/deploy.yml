@@ -19,7 +19,8 @@ jobs:
           script: |
             cd /var/www/invoice
 
-            git pull origin ok1
+            git fetch origin
+git reset --hard origin/ok1
 
             php artisan optimize:clear
             php artisan optimize
