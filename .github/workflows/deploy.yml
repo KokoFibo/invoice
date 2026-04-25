@@ -3,15 +3,15 @@ name: Deploy INVOICE
 on:
   push:
     branches:
-     
-     - ok1   # atau ganti ke main nanti
+      - ok1
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy ke VPS
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Deploy ke VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -21,7 +21,7 @@ jobs:
 
             git pull origin ok1
 
-            
+            php artisan optimize:clear
             php artisan optimize
-            php artisan  optimmize
-            php artisan queue:restart
+
+
