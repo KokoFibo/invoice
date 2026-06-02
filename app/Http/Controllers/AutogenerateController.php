@@ -111,7 +111,7 @@ class AutogenerateController extends Controller
             'status' => 'Draft',
         ]);
 
-        // YIG
+        // YSM
         $maxNumber = Invoice::max('number');
         $invoice = Invoice::create([
             'number' => $maxNumber + 1,
@@ -148,7 +148,7 @@ class AutogenerateController extends Controller
             'number' => $maxNumber + 1,
             'invoice_date' => now(),
             'due_date' => now()->addDays(7),
-            'customer_id' => 1,
+            'customer_id' => 6,
             'contract' => '',
             'package' => $bai_package,
             'price' => 2000000,
