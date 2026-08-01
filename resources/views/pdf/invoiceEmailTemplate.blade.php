@@ -86,8 +86,8 @@
                     </tr>
                 </table>
                 <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp;
-                    &nbsp; &nbsp; Bank OCBC</span>
-                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acc No : 634810187381</span>
+                    &nbsp; &nbsp; Bank Permata</span>
+                <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Acc No : 4000685688</span>
                 <br><span style="font-size: 16px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Phang Esti Anton</span>
 
                 </p>

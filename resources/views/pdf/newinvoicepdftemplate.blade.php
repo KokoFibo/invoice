@@ -47,9 +47,9 @@
             <div class="flex-1 min-w-[220px] bg-slate-100 p-4 rounded-lg">
                 <h3 class="text-xs font-semibold text-slate-900 mb-2">Payment Information</h3>
                 <p class="text-sm text-slate-700 leading-relaxed">
-                    Bank: OCBC<br />
+                    Bank: Permata<br />
                     Account Name: Phang Esti Anton<br />
-                    Account No.: 634810187381
+                    Account No.: 4000685688
                 </p>
             </div>
         </div>
