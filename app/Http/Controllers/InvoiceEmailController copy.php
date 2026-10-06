@@ -87,13 +87,31 @@ class InvoiceEmailController extends Controller
         }
 
         $pdf = Browsershot::html($template)
-            ->setOption('args', ['--disable-web-security'])
+            // ini utk di PC
+            // ->setOption('args', ['--disable-web-security'])
+            // ->showBackground()
+            // ->noSandbox()
+            // ok dah
+
+            // ini untuk di vps
+            ->addChromiumArguments([
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-setuid-sandbox',
+            ])
+            // PENTING: Paksa Home ke /tmp agar tidak bentrok dengan permission /var/www/.local
+            ->setEnvVars([
+                'HOME' => '/tmp',
+                'PUPPETEER_CACHE_DIR' => base_path('.cache/puppeteer'),
+            ])
+
+            // batas sampai sini
             ->showBackground()
-            ->noSandbox()
             // ->showBrowserHeaderAndFooter()
             // ->footerHtml($footerHtml)
+            ->emulateMedia('screen') // Agar variabel CSS :root terbaca
             ->format('A4')
-            ->pdf();
+            ->pdf(); // hasil binary
 
 
         // Kirim langsung ke browser untuk di-download
@@ -123,7 +141,9 @@ class InvoiceEmailController extends Controller
         } catch (\Exception $e) {
             // dd('ada kesalahan email');
             //  return $e->getMessage();
-            return redirect(route('invoice'))->with('error', 'Fail Sending Email');
+            // return redirect(route('invoice'))->with('error', 'Fail Sending Email');
+            dd($e->getMessage());
+            return redirect(route('invoice'))->with('error', $e->getMessage());
         }
     }
 }
