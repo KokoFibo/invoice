@@ -2,148 +2,132 @@
 
 namespace App\Http\Controllers;
 
-use Mpdf\Mpdf;
 use Carbon\Carbon;
 use App\Models\Invoice;
 use App\Models\Contract;
 use App\Models\Customer;
 use App\Mail\InvoiceMail;
-use Illuminate\Http\Request;
 use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 class InvoiceEmailController extends Controller
 {
     public function index($number)
     {
-        $is_emailed = false;
-        $invoices = Invoice::where('number', $number)->get();
-        $invoice = Invoice::where('number', $number)->first();
-        $customer = Customer::find($invoice->customer_id);
-        $contract = Contract::where('contract_number', $invoice->contract)->first();
-        if ($contract != '') {
-            $contract_number = contractNumberFormat($contract->contract_number, $contract->contract_date);
-        } else {
-            $contract_number = '-';
-        }
-
-        if ($invoice->status == "Emailed")  $is_emailed = true;
+        [$invoices, $invoice, $customer, $contractNumber] = $this->loadInvoiceData($number);
 
         return view('pdf.invoicepdf', [
-            'invoices' => $invoices,
-            'invoice' => $invoice,
-            'customer' => $customer,
-            'contract_number' => $contract_number,
-            'is_emailed' => $is_emailed,
+            'invoices'        => $invoices,
+            'invoice'         => $invoice,
+            'customer'        => $customer,
+            'contract_number' => $contractNumber,
+            'is_emailed'      => $invoice->status === 'Emailed',
         ]);
     }
 
-
-
     public function pdf($number, $signature)
     {
-        $invoices = Invoice::where('number', $number)->get();
-        $invoice = Invoice::where('number', $number)->first();
-        $customer = Customer::find($invoice->customer_id);
-        $contract = Contract::where('contract_number', $invoice->contract)->first();
-        if ($contract != '') {
-            $contract_number = contractNumberFormat($contract->contract_number, $contract->contract_date);
-        } else {
-            $contract_number = '-';
-        }
-        // $saveLocation = 'public/storage/pdf/';
+        [$invoices, $invoice, $customer] = $this->loadInvoiceData($number);
+
         $pdfFileName = 'Kokofibo_Invoice_' . invNumberFormat($number, $invoice->invoice_date) . '.pdf';
-        $template =  view(
-            'pdf.newinvoicepdftemplate',
-            [
-                'invoices' => $invoices,
-                'invoice' => $invoice,
-                'customer' => $customer
-                // 'contract_number' => $contract_number
-            ]
-        )->render();
 
-        if ($signature == "signature") {
-            $template =  view(
-                'pdf.newinvoicepdftemplate',
-                [
-                    'invoices' => $invoices,
-                    'invoice' => $invoice,
-                    'customer' => $customer
-                    // 'contract_number' => $contract_number
-                ]
-            )->render();
-        } else {
-            $template =  view(
-                'pdf.newinvoicepdftemplateNoSignature',
-                [
-                    'invoices' => $invoices,
-                    'invoice' => $invoice,
-                    'customer' => $customer
-                    // 'contract_number' => $contract_number
-                ]
-            )->render();
+        $viewName = $signature === 'signature'
+            ? 'pdf.newinvoicepdftemplate'
+            : 'pdf.newinvoicepdftemplateNoSignature';
+
+        $template = view($viewName, [
+            'invoices' => $invoices,
+            'invoice'  => $invoice,
+            'customer' => $customer,
+        ])->render();
+
+        try {
+            $pdf = $this->makeBrowsershot($template)->pdf();
+        } catch (\Throwable $e) {
+            Log::error('Gagal generate PDF invoice', [
+                'number' => $number,
+                'error'  => $e->getMessage(),
+            ]);
+
+            return redirect(route('invoice'))->with('error', 'Gagal membuat PDF: ' . $e->getMessage());
         }
 
-        $pdf = Browsershot::html($template)
-            // ini utk di PC
-            // ->setOption('args', ['--disable-web-security'])
-            // ->showBackground()
-            // ->noSandbox()
-            // ok dah
-
-            // ini untuk di vps
-            ->addChromiumArguments([
-                '--no-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-setuid-sandbox',
-            ])
-            // PENTING: Paksa Home ke /tmp agar tidak bentrok dengan permission /var/www/.local
-            ->setEnvVars([
-                'HOME' => '/tmp',
-                'PUPPETEER_CACHE_DIR' => base_path('.cache/puppeteer'),
-            ])
-
-            // batas sampai sini
-            ->showBackground()
-            // ->showBrowserHeaderAndFooter()
-            // ->footerHtml($footerHtml)
-            ->emulateMedia('screen') // Agar variabel CSS :root terbaca
-            ->format('A4')
-            ->pdf(); // hasil binary
-
-
-        // Kirim langsung ke browser untuk di-download
         return response($pdf)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'attachment; filename="' . $pdfFileName . '"');
-
-        // return back()->with('message', 'PDF Generated');
     }
 
     public function invoiceEmail($number)
     {
-        // Mail::to('kokonaci@gmail.com')->send(new InvoiceMail($number));
-
-
-
         try {
             Mail::send(new InvoiceMail($number));
-            $data = Invoice::where('number', $number)->get();
-            foreach ($data as $d) {
 
-                $d->emailed_at = Carbon::parse(Carbon::now())->format('Y-m-d H:i:s');
-                $d->status = 'Emailed';
-                $d->save();
-            }
+            Invoice::where('number', $number)->update([
+                'emailed_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'status'     => 'Emailed',
+            ]);
+
             return redirect(route('invoice'))->with('success', 'Email sent');
-        } catch (\Exception $e) {
-            // dd('ada kesalahan email');
-            //  return $e->getMessage();
-            // return redirect(route('invoice'))->with('error', 'Fail Sending Email');
-            dd($e->getMessage());
+        } catch (\Throwable $e) {
+            Log::error('Gagal kirim email invoice', [
+                'number' => $number,
+                'error'  => $e->getMessage(),
+            ]);
+
             return redirect(route('invoice'))->with('error', $e->getMessage());
         }
+    }
+
+    /**
+     * Ambil data invoice, customer, dan nomor kontrak.
+     *
+     * @return array [$invoices, $invoice, $customer, $contractNumber]
+     */
+    private function loadInvoiceData($number): array
+    {
+        $invoices = Invoice::where('number', $number)->get();
+        $invoice  = $invoices->first();
+
+        abort_if(!$invoice, 404, 'Invoice tidak ditemukan');
+
+        $customer = Customer::find($invoice->customer_id);
+        $contract = Contract::where('contract_number', $invoice->contract)->first();
+
+        $contractNumber = $contract
+            ? contractNumberFormat($contract->contract_number, $contract->contract_date)
+            : '-';
+
+        return [$invoices, $invoice, $customer, $contractNumber];
+    }
+
+    /**
+     * Konfigurasi Browsershot.
+     * Catatan: addChromiumArguments() menambahkan "--" sendiri,
+     * jadi tulis nama argumen TANPA tanda hubung.
+     */
+    private function makeBrowsershot(string $template): Browsershot
+    {
+        $browsershot = Browsershot::html($template)
+            ->showBackground()
+            ->emulateMedia('screen') // agar variabel CSS :root terbaca
+            ->format('A4');
+
+        // Khusus server produksi (VPS, dijalankan sebagai www-data)
+        if (app()->environment('production')) {
+            $browsershot
+                ->addChromiumArguments([
+                    'no-sandbox',
+                    'disable-setuid-sandbox',
+                    'disable-dev-shm-usage',
+                ])
+                // Paksa HOME ke /tmp agar tidak bentrok dengan permission /var/www/.local
+                ->setEnvVars([
+                    'HOME'                => '/tmp',
+                    'PUPPETEER_CACHE_DIR' => base_path('.cache/puppeteer'),
+                ]);
+        }
+
+        return $browsershot;
     }
 }
